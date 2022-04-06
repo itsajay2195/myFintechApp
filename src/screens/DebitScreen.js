@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
     },
     slidingUpPanelStyle: {
         flex: 1,
-        padding:10,
+        padding:10, 
         borderWidth:5,
         marginTop:50,
         backgroundColor: COLORS.white,
