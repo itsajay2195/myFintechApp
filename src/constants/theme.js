@@ -9,6 +9,8 @@ export const COLORS = {
     red: "#D84035",
     black: "#000000",
     gray: "#757575",
+    toggleTrueTrackColor:'#0C365A',
+    toggleFalseTrackColor:'#C1C1C1',
     transparentWhite: 'rgba(255, 255, 255, 0.2)',
     transparentBlack: 'rgba(0, 0, 0, 0.8)',
     transparentBlack1: 'rgba(0, 0, 0, 0.4)',

@@ -1,17 +1,18 @@
-import { StyleSheet, Text, View, SafeAreaView, Animated, TouchableOpacity,Image } from 'react-native'
-import { COLORS, FONTS, icons, SIZES } from '../constants'
+import { StyleSheet, Text, View, SafeAreaView, Animated, TouchableOpacity, Image, StatusBar } from 'react-native'
+import { COLORS, PLATFORM, icons, SIZES } from '../constants'
 import React, { useState } from 'react'
 import SlidingUpPanel from 'rn-sliding-up-panel';
 import BottomTabs from '../components/common/BottomTab'
 import Header from '../components/common/Header'
-import Card from '../components/debit/Card';
+import Card from '../components/debitScreen/Card';
+import SlidingPaneListItem from '../components/debitScreen/SlidingPaneList';
 
 const Home = () => {
   const [loading, setLoading] = useState(false)
-  const [ showcard, setShowCard ] = useState(true)
+  const [showcard, setShowCard] = useState(true)
 
   const draggableRange = {
-    top: Platform.OS === 'ios' ? SIZES.height - 30 : SIZES.height - 30,
+    top: PLATFORM === 'ios' ? SIZES.height - 30 : SIZES.height - 30,
     bottom: SIZES.height / 1.5
   };
 
@@ -48,19 +49,26 @@ const Home = () => {
       <SlidingUpPanel showBackdrop={false} height={SIZES.height} animatedValue={new Animated.Value(SIZES.height / 1.5)} backdropOpacity={0} draggableRange={draggableRange}>
 
         <View style={styles.debitCardComponent}>
+
           <View style={styles.showCardButtonWrapper}>
-            <TouchableOpacity style={styles.showCardButton} onPress={()=>setShowCard(!showcard)}>
-              <Image source={showcard ? icons.remove : icons.show } style={{ height: 15, width: 12 }} />
+
+            <TouchableOpacity style={styles.showCardButton} onPress={() => setShowCard(!showcard)}>
+              <Image source={showcard ? icons.remove : icons.show} style={{ height: 15, width: 12 }} />
               <Text style={styles.showCardNumberText}>{!showcard ? 'Hide Card Number' : 'Show Card Number'}</Text>
             </TouchableOpacity>
+
           </View>
 
-          <Card></Card>
+          <Card showCard= {showcard}></Card>
 
         </View>
 
         <View style={styles.slidingUpPanelStyle}>
-          <Text>Hi</Text> 
+
+          <View style={styles.slideupContent}>
+            <SlidingPaneListItem></SlidingPaneListItem>
+          </View>
+
         </View>
 
       </SlidingUpPanel>
@@ -77,7 +85,8 @@ export default Home
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: COLORS.primaryBlue
+    backgroundColor: COLORS.primaryBlue,
+    paddingTop:PLATFORM === "android" ? StatusBar.currentHeight : 0
   },
   debitCardTextWrapper: {
     padding: SIZES.padding,
@@ -125,32 +134,35 @@ const styles = StyleSheet.create({
   showCardButtonWrapper: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
-   
+
   },
   showCardButton: {
     height: 30,
-    paddingHorizontal:5,
+    paddingHorizontal: 5,
     backgroundColor: COLORS.white,
     borderRadius: 5,
-    flexDirection:'row',
+    flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
   },
-  showCardNumberText:{
-    paddingHorizontal:5,
-    fontSize:12,
-    fontWeight:'bold',
-    color:COLORS.primaryGreen
+  showCardNumberText: {
+    paddingHorizontal: 5,
+    fontSize: 12,
+    fontWeight: 'bold',
+    color: COLORS.primaryGreen
   },
   slidingUpPanelStyle: {
     flex: 1,
-    padding: 10,
-    borderWidth: 5,
+    padding: SIZES.padding,
+    // borderWidth: 5,
     marginTop: 50,
     backgroundColor: COLORS.white,
     borderTopLeftRadius: SIZES.radius,
     borderTopRightRadius: SIZES.radius,
 
+  },
+  slideupContent: {
+    marginTop: 150
   },
   bottomTabSectionStyle: {
     justifyContent: 'flex-end'

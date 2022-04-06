@@ -2,9 +2,9 @@ import { StyleSheet, Text, View, Image,TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
 import { icons, COLORS, SIZES } from '../../constants'
 
-const Card = () => {
+const Card = ({showCard}) => {
     const cardNumber = '5647 3411 2413 2020'
-    const { showcard, setShowCard } = useState(false)
+  
 
     return (
         <>
@@ -20,7 +20,7 @@ const Card = () => {
                 </View>
 
                 <View>
-                    <Text style={styles.cardDetails}>{showcard ? cardNumber : cardNumber.replace(/\d{4}(?= \d{4})/g, "****")}</Text>
+                    <Text style={styles.cardDetails}>{!showCard ? cardNumber : cardNumber.replace(/\d{4}(?= \d{4})/g, "****")}</Text>
                     <Text style={[styles.cardDetails, { fontSize: SIZES.body5 }]}>Thru:12/20  CVV:456</Text>
                 </View>
 

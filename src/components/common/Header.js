@@ -1,14 +1,16 @@
 import { StyleSheet, Text, View, Image } from 'react-native'
 import {icons,COLORS} from '../../constants'
 import React from 'react'
+import { useNavigation } from '@react-navigation/native'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 
 const Header = ({showBack}) => {
+    const navigation = useNavigation()
   return (
     <View style={styles.container}>
         
         <View style={styles.iconWrapper}>
-                { showBack && <MaterialCommunityIcons name="chevron-left" size={30} color="#fff" />}
+                { showBack && <MaterialCommunityIcons onPress={()=> navigation.navigate('Home')} name="chevron-left" size={30} color="#fff" />}
         </View>
         
         <View style={styles.iconWrapper}>
