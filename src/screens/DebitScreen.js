@@ -6,6 +6,7 @@ import BottomTabs from '../components/common/BottomTab'
 import Header from '../components/common/Header'
 import Card from '../components/debitScreen/Card';
 import SlidingPaneListItem from '../components/debitScreen/SlidingPaneList';
+import CurrencyCard from '../components/common/CurrencyCard';
 
 const Home = () => {
   const [loading, setLoading] = useState(false)
@@ -33,9 +34,7 @@ const Home = () => {
 
         <View style={styles.currenyInfoWrapper}>
 
-          <View style={styles.currencySymbol}>
-            <Text style={styles.currencySymbolText}>S$</Text>
-          </View>
+          <CurrencyCard/>
 
           <View>
             <Text style={styles.currencyTotalText}>{loading ? '' : `  3,000`}</Text>
