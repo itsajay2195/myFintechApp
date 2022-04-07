@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { icons, COLORS, SIZES } from '../../constants'
 
@@ -8,10 +8,10 @@ const tagsList = [
     { id: 3, value: '15,000' }
 ]
 
-const Tags = () => {
+const Tags = ({setLimit}) => {
     return (
         <>
-            {tagsList.map(item => <Tag key={item.id} value={item.value} />)}
+            {tagsList.map(item => <Tag key={item.id} value={item.value} setLimit={setLimit} />)}
 
         </>
     )
@@ -19,11 +19,11 @@ const Tags = () => {
 
 export default Tags
 
-const Tag = () => {
+const Tag = ({value,setLimit}) => {
     return (
-        <View style={styles.container}>
-            <Text style={styles.currencyText}>S$ 5,000</Text>
-        </View>
+        <TouchableOpacity style={styles.container} onPress={()=>setLimit(value)}>
+            <Text style={styles.currencyText}>S$ {value}</Text>
+        </TouchableOpacity>
     )
 }
 

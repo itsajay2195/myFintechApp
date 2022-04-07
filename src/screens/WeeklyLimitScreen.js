@@ -1,11 +1,12 @@
 import { StyleSheet, Text, View, SafeAreaView, StatusBar, Image } from 'react-native'
-import React from 'react'
+import React,{useState} from 'react'
 import Header from '../components/common/Header'
 import { COLORS, PLATFORM, icons, SIZES } from '../constants'
 import CurrencyCard from '../components/common/CurrencyCard'
 import Tags from '../components/weeklyLimitScreen/Tags'
 
 const WeeklyLimit = () => {
+  const [limit, setLimit] = useState('5,000')
   return (
     <View style={styles.container}>
 
@@ -27,7 +28,7 @@ const WeeklyLimit = () => {
 
         <View style={styles.currenyLimitContainer}>
           <CurrencyCard />
-          <Text style={{paddingHorizontal:SIZES.padding, fontWeight:'bold'}}>5,000</Text>
+          <Text style={{paddingHorizontal:SIZES.padding, fontWeight:'bold'}}>{limit}</Text>
         </View>
 
         <View style={styles.line}/>
@@ -37,7 +38,7 @@ const WeeklyLimit = () => {
         </View>
 
         <View style={styles.tagsContainer}>
-            <Tags/>
+            <Tags setLimit={setLimit}/>
         </View>
       </View>
 
