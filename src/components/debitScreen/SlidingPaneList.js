@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { COLORS, icons } from '../../constants'
 import { useNavigation } from '@react-navigation/native'
 import { useDispatch,useSelector } from 'react-redux';
-import { selectMenuInfo,setMenuInfo,MenuInfo } from '../../slices/userSlice'
+import { selectMenuInfo,setMenuInfo,setSpendingLimit } from '../../slices/userSlice'
 
 
 
@@ -46,7 +46,7 @@ const ListItem = ({item,spendingLimit }) => {
 
         <View style={styles.menuInfoWrapper} >
           <Text style={{ fontWeight: '400' }}>{item.title}</Text>
-          <Text style={{ color: '#b9b9b9',fontSize:14 }} numberOfLines={2}>{item.title === 'Weekly spending limit' &&spendingLimit ? `Your weekly spending limit is S$${spendingLimit}` :item.meta}</Text>
+          <Text style={{ color: '#b9b9b9',fontSize:14 }} numberOfLines={2}>{item.title === 'Weekly spending limit' && spendingLimit ? `Your weekly spending limit is S$${spendingLimit}` :item.meta}</Text>
         </View>
 
       </View>
@@ -61,6 +61,7 @@ const ListItem = ({item,spendingLimit }) => {
             onValueChange={() => {
               if(item?.isToggled){
                 dispatch( setMenuInfo(menuInfoModifierPayload(item.id)))
+                dispatch(setSpendingLimit(null))
                 return;
               }
               navigation.navigate('Limit',{id:item.id, toggledValue:item?.isToggled})

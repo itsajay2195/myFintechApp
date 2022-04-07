@@ -122,8 +122,22 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between'
   },
-  saveButtonContainer:{backgroundColor: 'white', justifyContent: 'flex-end'},
-  saveButtonWrapper:{ alignSelf: 'center', justifyContent: 'center', alignItems: 'center', flexDirection: 'row', height: 60, width: '80%', backgroundColor: COLORS.primaryGreen, borderRadius: 50},
+  saveButtonContainer:{
+    backgroundColor: 'white',
+    justifyContent: 'flex-end',
+    paddingBottom: PLATFORM === "android" ? StatusBar.currentHeight : 0
+  },
+  saveButtonWrapper:{ 
+    alignSelf: 'center', 
+    justifyContent: 'center', 
+    alignItems: 'center', 
+    flexDirection: 'row', 
+    height: 60, width: '80%',
+    backgroundColor: 
+    COLORS.primaryGreen, 
+    borderRadius: 50,
+    
+  },
   saveText:{ color: COLORS.white,fontSize:SIZES.h3, fontWeight:'bold' }
 
 })
