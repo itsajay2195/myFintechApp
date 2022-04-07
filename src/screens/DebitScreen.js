@@ -8,13 +8,14 @@ import Card from '../components/debitScreen/Card';
 import SlidingPaneListItem from '../components/debitScreen/SlidingPaneList';
 import CurrencyCard from '../components/common/CurrencyCard';
 import { useSelector } from 'react-redux';
-import { selectLoading,selectSpendingLimit } from '../slices/userSlice'
+import { selectLoading,selectSpendingLimit ,selectMenuInfo} from '../slices/userSlice'
 import Bar from '../components/debitScreen/Bar';
 
 const Home = () => {
   const [showcard, setShowCard] = useState(true)
   const loading = useSelector(selectLoading)
   const spendingLimit = useSelector(selectSpendingLimit)
+  const menuInfo = useSelector(selectMenuInfo)
 
 
   const draggableRange = {
@@ -27,7 +28,7 @@ const Home = () => {
   return (
     <View style={styles.container}>
       <SafeAreaView >
-
+        
         <View>
           <Header showBack={false}></Header>
         </View>

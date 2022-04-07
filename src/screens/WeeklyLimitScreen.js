@@ -4,23 +4,31 @@ import Header from '../components/common/Header'
 import { COLORS, PLATFORM, icons, SIZES } from '../constants'
 import CurrencyCard from '../components/common/CurrencyCard'
 import Tags from '../components/weeklyLimitScreen/Tags'
-import { selectSpendingLimit,setSpendingLimit } from '../slices/userSlice'
+import { selectSpendingLimit,setSpendingLimit,setMenuInfo,selectMenuInfo } from '../slices/userSlice'
 import { useSelector,useDispatch} from 'react-redux';
 import { useNavigation } from '@react-navigation/native'
 
-const WeeklyLimit = () => {
-  const spendingLimit = useSelector(selectSpendingLimit)
+const WeeklyLimit = (props) => {
+  const {id,toggledValue} = props.route.params;
+  const menuInfo = useSelector(selectMenuInfo)
   const [limitFieldValue,onLimitFieldValueChange] = useState('')
   const dispatch = useDispatch();
   const navigation = useNavigation()
+  
 
-    const saveSpendingLimit =(val)=>{
+    const menuInfoModifierPayload = (id)=>{
+      let objIndex = menuInfo.findIndex((obj => obj.id == id));
+      return {index:objIndex,value:!toggledValue}
+    }
+    const saveSpendingLimit =(val,id)=>{
         let num = parseFloat(val.replace(',', ''))//  this is basically done to check if the user inputted number is less than 0 or not
         if(num < 0){
           Alert.alert('Amount cannot be less than Zero') 
         }
         let decimalStrippedValue = val.includes(".") ? val.split(".")[0] : val // this will strip the contents after the decimal point
         dispatch(setSpendingLimit(decimalStrippedValue))
+         menuInfoModifierPayload(id)
+        dispatch( setMenuInfo(menuInfoModifierPayload(id)))
         navigation.navigate('Home')
       }
 
@@ -63,7 +71,7 @@ const WeeklyLimit = () => {
       </View>
       <SafeAreaView style={styles.saveButtonContainer}>
 
-        <TouchableOpacity style={styles.saveButtonWrapper} onPress={()=>saveSpendingLimit(limitFieldValue)}>
+        <TouchableOpacity style={styles.saveButtonWrapper} onPress={()=>saveSpendingLimit(limitFieldValue,id)}>
           <Text style={styles.saveText}>Save</Text>
         </TouchableOpacity>
 
