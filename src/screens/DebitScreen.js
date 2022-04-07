@@ -9,6 +9,7 @@ import SlidingPaneListItem from '../components/debitScreen/SlidingPaneList';
 import CurrencyCard from '../components/common/CurrencyCard';
 import { useSelector } from 'react-redux';
 import { selectLoading } from '../slices/userSlice'
+import Bar from '../components/debitScreen/Bar';
 
 const Home = () => {
   const [showcard, setShowCard] = useState(true)
@@ -73,6 +74,16 @@ const Home = () => {
         <View style={styles.slidingUpPanelStyle}>
 
           <View style={styles.slideupContent}>
+
+            <View style={styles.spendingLimitWrapper}>
+              <Text>Debit card spending limit</Text>
+              <Text style={{ color: COLORS.gray }}><Text style={{ color: COLORS.primaryGreen, fontWeight: 'bold' }}>$345 </Text>| 5,000</Text>
+            </View>
+
+            <View style={{ padding: SIZES.padding }}>
+              <Bar></Bar>
+            </View>
+
             <SlidingPaneListItem></SlidingPaneListItem>
           </View>
 
@@ -173,10 +184,13 @@ const styles = StyleSheet.create({
   slideupContent: {
     marginTop: 150
   },
+  spendingLimitWrapper: {
+    paddingHorizontal: SIZES.padding,
+    flexDirection: 'row',
+    justifyContent: 'space-between'
+  },
   bottomTabSectionStyle: {
     justifyContent: 'flex-end',
-
-
   }
 
 })

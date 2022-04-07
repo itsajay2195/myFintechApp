@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View, SafeAreaView, StatusBar, Image } from 'react-native'
 import React,{useState} from 'react'
 import Header from '../components/common/Header'
+import Bar from '../components/debitScreen/Bar'
 import { COLORS, PLATFORM, icons, SIZES } from '../constants'
 import CurrencyCard from '../components/common/CurrencyCard'
 import Tags from '../components/weeklyLimitScreen/Tags'
@@ -40,6 +41,8 @@ const WeeklyLimit = () => {
         <View style={styles.tagsContainer}>
             <Tags setLimit={setLimit}/>
         </View>
+
+        <Bar/>
       </View>
 
     </View>
