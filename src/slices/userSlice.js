@@ -5,7 +5,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     loading: false,
     userInfo: [],
-    spendingLimit:'5,000'
+    spendingLimit:null // this state is locally maintained, just for the assignment puropse. The implemntation will be different in real world use case
 }
 
 export const userSlice = createSlice({

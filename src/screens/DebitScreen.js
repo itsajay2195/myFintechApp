@@ -63,7 +63,7 @@ const Home = () => {
 
             <TouchableOpacity style={styles.showCardButton} onPress={() => setShowCard(!showcard)}>
               <Image source={showcard ? icons.remove : icons.show} style={{ height: 15, width: 12 }} />
-              <Text style={styles.showCardNumberText}>{!showcard ? 'Hide Card Number' : 'Show Card Number'}</Text>
+              <Text style={styles.showCardNumberText}>{showcard ? 'Hide Card Number' : 'Show Card Number'}</Text>
             </TouchableOpacity>
 
           </View>
@@ -75,8 +75,9 @@ const Home = () => {
         <View style={styles.slidingUpPanelStyle}>
 
           <View style={styles.slideupContent}>
-
-            <View style={styles.spendingLimitWrapper}>
+            {spendingLimit &&
+            <>
+             <View style={styles.spendingLimitWrapper}>
                 <Text style={{fontSize:12}}>Debit card spending limit</Text>
                 <Text style={{color:COLORS.gray, fontSize:12}}><Text style={{color:COLORS.primaryGreen,fontWeight:'bold'}}>$345 </Text>| ${spendingLimit}</Text>
             </View>
@@ -84,8 +85,11 @@ const Home = () => {
             <View style={{padding:5}}>
               <Bar></Bar>
             </View>
+            </>
+           
+            }  
             
-            <SlidingPaneListItem></SlidingPaneListItem>
+            <SlidingPaneListItem spendingLimit={spendingLimit}></SlidingPaneListItem>
           </View>
 
         </View>

@@ -1,14 +1,16 @@
 import { StyleSheet, Text, View, SafeAreaView, StatusBar, Image } from 'react-native'
-import React,{useState} from 'react'
+import React, { useState } from 'react'
 import Header from '../components/common/Header'
 import Bar from '../components/debitScreen/Bar'
-import { COLORS, PLATFORM, icons, SIZES } from '../constants'
+import { COLORS, PLATFORM, icons, SIZES, FONTS } from '../constants'
 import CurrencyCard from '../components/common/CurrencyCard'
 import Tags from '../components/weeklyLimitScreen/Tags'
 import { selectSpendingLimit } from '../slices/userSlice'
 import { useSelector } from 'react-redux';
+import { TouchableOpacity } from 'react-native-gesture-handler'
 
 const WeeklyLimit = () => {
+  // const [spendingLimit, setspendingLimit]
   const spendingLimit = useSelector(selectSpendingLimit)
 
   return (
@@ -28,26 +30,33 @@ const WeeklyLimit = () => {
           <Text style={{ left: 10 }}>Set a weekly debit card spending limit</Text>
         </View>
 
-        
+
 
         <View style={styles.currenyLimitContainer}>
           <CurrencyCard />
-          <Text style={{paddingHorizontal:SIZES.padding, fontWeight:'bold'}}>{spendingLimit}</Text>
+          <Text style={{ paddingHorizontal: SIZES.padding, fontWeight: 'bold' }}>{spendingLimit}</Text>
         </View>
 
-        <View style={styles.line}/>
+        <View style={styles.line} />
 
         <View>
-            <Text style={{  color: COLORS.gray, fontSize: 12 }} numberOfLines={2}>Here weekly means the last 7 days- not the calendar week</Text>
+          <Text style={{ color: COLORS.gray, fontSize: 12 }} numberOfLines={2}>Here weekly means the last 7 days- not the calendar week</Text>
         </View>
 
         <View style={styles.tagsContainer}>
-            <Tags />
+          <Tags />
         </View>
 
-        <Bar/>
-      </View>
 
+
+      </View>
+      <SafeAreaView style={styles.saveButtonContainer}>
+
+        <TouchableOpacity style={styles.saveButtonWrapper}>
+          <Text style={styles.saveText}>Save</Text>
+        </TouchableOpacity>
+
+      </SafeAreaView>
     </View>
 
   )
@@ -87,12 +96,15 @@ const styles = StyleSheet.create({
   },
   currenyLimitContainer: {
     flexDirection: 'row',
-    paddingVertical:15,
+    paddingVertical: 15,
   },
-  tagsContainer:{
-    paddingVertical:SIZES.padding,
-    flexDirection:'row',
-    justifyContent:'space-between'
-  }
+  tagsContainer: {
+    paddingVertical: SIZES.padding,
+    flexDirection: 'row',
+    justifyContent: 'space-between'
+  },
+  saveButtonContainer:{backgroundColor: 'white', justifyContent: 'flex-end'},
+  saveButtonWrapper:{ alignSelf: 'center', justifyContent: 'center', alignItems: 'center', flexDirection: 'row', height: 60, width: '80%', backgroundColor: COLORS.primaryGreen, borderRadius: 50},
+  saveText:{ color: COLORS.white,fontSize:SIZES.h3, fontWeight:'bold' }
 
 })
