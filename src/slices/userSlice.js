@@ -5,6 +5,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     loading: false,
     userInfo: [],
+    spendingLimit:'5,000'
 }
 
 export const userSlice = createSlice({
@@ -18,15 +19,20 @@ export const userSlice = createSlice({
             state.userInfo = action.payload
             state.loading = false
         },
+        setSpendingLimit :(state, action) =>{
+            state.spendingLimit = action.payload
+           
+        }
 
     }
 });
 
-export const { setLoading, setUserInfo } = userSlice.actions
+export const { setLoading, setUserInfo ,setSpendingLimit} = userSlice.actions
 
 // selectors -> they are used to grab info from the state
 
 export const selectUserInfo = state => state.user.userInfo
 export const selectLoading = state => state.user.loading
+export const selectSpendingLimit = state => state.user.spendingLimit
 
 export default userSlice.reducer

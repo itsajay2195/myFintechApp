@@ -5,9 +5,12 @@ import Bar from '../components/debitScreen/Bar'
 import { COLORS, PLATFORM, icons, SIZES } from '../constants'
 import CurrencyCard from '../components/common/CurrencyCard'
 import Tags from '../components/weeklyLimitScreen/Tags'
+import { selectSpendingLimit } from '../slices/userSlice'
+import { useSelector } from 'react-redux';
 
 const WeeklyLimit = () => {
-  const [limit, setLimit] = useState('5,000')
+  const spendingLimit = useSelector(selectSpendingLimit)
+
   return (
     <View style={styles.container}>
 
@@ -29,7 +32,7 @@ const WeeklyLimit = () => {
 
         <View style={styles.currenyLimitContainer}>
           <CurrencyCard />
-          <Text style={{paddingHorizontal:SIZES.padding, fontWeight:'bold'}}>{limit}</Text>
+          <Text style={{paddingHorizontal:SIZES.padding, fontWeight:'bold'}}>{spendingLimit}</Text>
         </View>
 
         <View style={styles.line}/>
@@ -39,7 +42,7 @@ const WeeklyLimit = () => {
         </View>
 
         <View style={styles.tagsContainer}>
-            <Tags setLimit={setLimit}/>
+            <Tags />
         </View>
 
         <Bar/>

@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import { icons, COLORS, SIZES } from '../../constants'
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
-import { setUserInfo, setLoading, selectUserInfo, selectLoading } from '../../slices/userSlice'
+import { setUserInfo, setLoading, selectUserInfo, selectLoading,setSpendingLimit } from '../../slices/userSlice'
 
 const Card = ({ showCard }) => {
     const dispatch = useDispatch();
@@ -21,7 +21,6 @@ const Card = ({ showCard }) => {
                 .then((data) => {
                     dispatch(setLoading(false))
                     dispatch(setUserInfo(data))
-
                 })
 
         }

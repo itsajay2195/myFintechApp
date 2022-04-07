@@ -1,6 +1,8 @@
 import { StyleSheet, Text, TouchableOpacity } from 'react-native'
 import React from 'react'
-import { icons, COLORS, SIZES } from '../../constants'
+import {  COLORS, SIZES } from '../../constants'
+import { setSpendingLimit } from '../../slices/userSlice'
+import { useDispatch } from 'react-redux';
 
 const tagsList = [
     { id: 1, value: '5,000' },
@@ -8,7 +10,12 @@ const tagsList = [
     { id: 3, value: '15,000' }
 ]
 
-const Tags = ({setLimit}) => {
+const Tags = () => {
+    const dispatch = useDispatch();
+
+    const setLimit =(value)=>{
+        dispatch(setSpendingLimit(value))
+      }
     return (
         <>
             {tagsList.map(item => <Tag key={item.id} value={item.value} setLimit={setLimit} />)}

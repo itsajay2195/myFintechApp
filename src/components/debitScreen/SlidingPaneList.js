@@ -32,7 +32,7 @@ const ListItem = ({ title, meta, image, toggle }) => {
   return (
     <View style={styles.container}>
 
-      <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
+      <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
         <Image source={image} style={{ height: 30, width: 30 }} />
 
         <View style={styles.menuInfoWrapper} >
@@ -45,7 +45,7 @@ const ListItem = ({ title, meta, image, toggle }) => {
       <View >
         {toggle === null || toggle ?
           <Switch
-            style={{ transform: [{ scaleX: .8 }, { scaleY: .8 }] }}
+            style={{ transform: [{ scaleX: .6 }, { scaleY: .6}] }}
             trackColor={{ false: COLORS.toggleFalseTrackColor, true: COLORS.toggleTrueTrackColor }}
             thumbColor={toggleState ? COLORS.white : COLORS.white}
             ios_backgroundColor={COLORS.toggleFalseTrackColor}
