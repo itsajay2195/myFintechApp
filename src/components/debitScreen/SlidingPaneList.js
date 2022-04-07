@@ -42,29 +42,29 @@ const ListItem = ({ title, meta, image, toggle }) => {
 
       </View>
 
-        <View >
-          {toggle === null || toggle ?
-            <Switch
-              style={{ transform: [{ scaleX: .8 }, { scaleY: .8 }] }}
-              trackColor={{ false: COLORS.toggleFalseTrackColor, true: COLORS.toggleTrueTrackColor }}
-              thumbColor={toggleState ? COLORS.white : COLORS.white}
-              ios_backgroundColor={COLORS.toggleFalseTrackColor}
-              onValueChange={() => {
-                if(toggleState){
-                  setToggleState(!toggleState)
-                  return
-                }
+      <View >
+        {toggle === null || toggle ?
+          <Switch
+            style={{ transform: [{ scaleX: .8 }, { scaleY: .8 }] }}
+            trackColor={{ false: COLORS.toggleFalseTrackColor, true: COLORS.toggleTrueTrackColor }}
+            thumbColor={toggleState ? COLORS.white : COLORS.white}
+            ios_backgroundColor={COLORS.toggleFalseTrackColor}
+            onValueChange={() => {
+              if (toggleState) {
                 setToggleState(!toggleState)
-                navigation.navigate('Limit')
-              }}
-              disabled={toggle === null ? true :false}
-              value={toggleState}
-            /> : null
-          }
+                return
+              }
+              setToggleState(!toggleState)
+              navigation.navigate('Limit')
+            }}
+            disabled={toggle === null ? true : false}
+            value={toggleState}
+          /> : null
+        }
 
-        </View>
+      </View>
 
-     
+
     </View>
   )
 }

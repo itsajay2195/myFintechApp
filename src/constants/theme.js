@@ -4,17 +4,12 @@ const { width, height } = Dimensions.get("window");
 export const COLORS = {
     primaryBlue: "#0C365A",
     primaryGreen: "#01D167",
-    secondaryGreen:"#DDFADF", //used to tags bg
+    secondaryGreen: "#DDFADF", //used to tags bg
     white: "#fff",
     lightGreen: "#20D167", // used for tag's text
-    red: "#D84035",
-    black: "#000000",
     gray: "#757575",
-    toggleTrueTrackColor:'#0C365A',
-    toggleFalseTrackColor:'#C1C1C1',
-    transparentWhite: 'rgba(255, 255, 255, 0.2)',
-    transparentBlack: 'rgba(0, 0, 0, 0.8)',
-    transparentBlack1: 'rgba(0, 0, 0, 0.4)',
+    toggleTrueTrackColor: '#0C365A',
+    toggleFalseTrackColor: '#C1C1C1',
 };
 export const SIZES = {
     // global sizes

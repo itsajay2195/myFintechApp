@@ -23,5 +23,5 @@ const styles = StyleSheet.create({
         color: COLORS.white,
         fontSize: SIZES.font,
         fontWeight: 'bold'
-      }
+    }
 })

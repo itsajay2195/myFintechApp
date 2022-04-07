@@ -7,16 +7,20 @@ import Header from '../components/common/Header'
 import Card from '../components/debitScreen/Card';
 import SlidingPaneListItem from '../components/debitScreen/SlidingPaneList';
 import CurrencyCard from '../components/common/CurrencyCard';
-import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { selectLoading } from '../slices/userSlice'
 
 const Home = () => {
-  const [loading, setLoading] = useState(false)
   const [showcard, setShowCard] = useState(true)
+  const loading = useSelector(selectLoading)
+
 
   const draggableRange = {
     top: PLATFORM === 'ios' ? SIZES.height - 30 : SIZES.height - 30,
     bottom: SIZES.height / 1.5
   };
+
+
 
   return (
     <View style={styles.container}>
@@ -171,8 +175,8 @@ const styles = StyleSheet.create({
   },
   bottomTabSectionStyle: {
     justifyContent: 'flex-end',
-    
-   
+
+
   }
 
 })

@@ -2,31 +2,31 @@
 
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState ={
-    loading:false,
-    userInfo:[],
+const initialState = {
+    loading: false,
+    userInfo: [],
 }
 
-export const userSlice= createSlice({
+export const userSlice = createSlice({
     name: "user",
     initialState,
-    reducers:{
-        setLoading:(state,action)=>{
+    reducers: {
+        setLoading: (state, action) => {
             state.loading = true
         },
         setUserInfo: (state, action) => {
             state.userInfo = action.payload
             state.loading = false
         },
-        
+
     }
 });
 
-export const {setLoading,setUserInfo} = userSlice.actions
+export const { setLoading, setUserInfo } = userSlice.actions
 
 // selectors -> they are used to grab info from the state
 
-export const selectUserInfo = state => state.nav.userInfo
-export const selectLoading = state => state.nav.loading
+export const selectUserInfo = state => state.user.userInfo
+export const selectLoading = state => state.user.loading
 
 export default userSlice.reducer

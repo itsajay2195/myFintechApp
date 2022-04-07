@@ -3,18 +3,18 @@ import React from 'react'
 import { icons, COLORS, SIZES } from '../../constants'
 
 const tagsList = [
-    { id: 1, value: '5,000'},
-    { id: 2, value: '10,000'},
-    { id: 3, value: '15,000'}
-  ]
-  
+    { id: 1, value: '5,000' },
+    { id: 2, value: '10,000' },
+    { id: 3, value: '15,000' }
+]
+
 const Tags = () => {
     return (
         <>
-        {tagsList.map(item => <Tag key={item.id} value={item.value} />)}
-  
-      </>
-  )
+            {tagsList.map(item => <Tag key={item.id} value={item.value} />)}
+
+        </>
+    )
 }
 
 export default Tags
@@ -35,6 +35,6 @@ const styles = StyleSheet.create({
     currencyText: {
         fontSize: SIZES.h5,
         color: COLORS.lightGreen,
-        fontWeight:'bold'
+        fontWeight: 'bold'
     }
 })
