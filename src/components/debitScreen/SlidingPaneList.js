@@ -9,7 +9,7 @@ import { setSpendingLimit } from '../../slices/userSlice'
 
 const panelMenu = [
   {id:1, image: icons.insight, title: 'Top-up-account', meta: 'Deposit money to your account to use with card', toggle: false },
-  {id:2, image: icons.transfer, title: 'Weekly spending limit', meta: "you haven't set any spending limit on card", toggle: true },
+  {id:2, image: icons.transfer, title: 'Weekly spending limit', meta: "you haven't set any spending limit on card", toggle: true,isToggled:false },
   {id:3, image: icons.freeze, title: 'Freeze card', meta: 'Your Debit card is currently active', toggle: null },
   {id:4, image: icons.newCard, title: 'Get a new card ', meta: 'This activates your current debit card', toggle: false },
   {id:5, image: icons.deactivate, title: 'Deactivated cards', meta: 'This deactivates your current debit card', toggle: false },
@@ -53,13 +53,15 @@ const ListItem = ({ title, meta, image, toggle,spendingLimit }) => {
             thumbColor={toggleState ? COLORS.white : COLORS.white}
             ios_backgroundColor={COLORS.toggleFalseTrackColor}
             onValueChange={() => {
-              if (toggleState) {
+              navigation.navigate('Limit')
+              if (toggleState ) {
                 setToggleState(!toggleState)
                 dispatch(setSpendingLimit(null))
                 return
               }
-              setToggleState(!toggleState)
-              navigation.navigate('Limit')
+              if(spendingLimit!== null) setToggleState(!toggleState) // this will enable the toogle only if the user has set the weekly limit. This covers the scenario where the user navigates back to the Debit screen without setting the weeklyLimit
+              
+              
             }}
             disabled={toggle === null ? true : false}
             value={toggleState}

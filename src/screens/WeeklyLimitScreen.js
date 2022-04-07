@@ -1,17 +1,28 @@
-import { StyleSheet, Text, View, SafeAreaView, StatusBar, Image } from 'react-native'
+import { StyleSheet, Text, View, SafeAreaView, StatusBar, Image,TextInput,TouchableOpacity,Alert } from 'react-native'
 import React, { useState } from 'react'
 import Header from '../components/common/Header'
-import Bar from '../components/debitScreen/Bar'
-import { COLORS, PLATFORM, icons, SIZES, FONTS } from '../constants'
+import { COLORS, PLATFORM, icons, SIZES } from '../constants'
 import CurrencyCard from '../components/common/CurrencyCard'
 import Tags from '../components/weeklyLimitScreen/Tags'
-import { selectSpendingLimit } from '../slices/userSlice'
-import { useSelector } from 'react-redux';
-import { TouchableOpacity } from 'react-native-gesture-handler'
+import { selectSpendingLimit,setSpendingLimit } from '../slices/userSlice'
+import { useSelector,useDispatch} from 'react-redux';
+import { useNavigation } from '@react-navigation/native'
 
 const WeeklyLimit = () => {
-  // const [spendingLimit, setspendingLimit]
   const spendingLimit = useSelector(selectSpendingLimit)
+  const [limitFieldValue,onLimitFieldValueChange] = useState('')
+  const dispatch = useDispatch();
+  const navigation = useNavigation()
+
+    const saveSpendingLimit =(val)=>{
+        let num = parseFloat(val.replace(',', ''))//  this is basically done to check if the user inputted number is less than 0 or not
+        if(num < 0){
+          Alert.alert('Amount cannot be less than Zero') 
+        }
+        let decimalStrippedValue = val.includes(".") ? val.split(".")[0] : val // this will strip the contents after the decimal point
+        dispatch(setSpendingLimit(decimalStrippedValue))
+        navigation.navigate('Home')
+      }
 
   return (
     <View style={styles.container}>
@@ -34,7 +45,7 @@ const WeeklyLimit = () => {
 
         <View style={styles.currenyLimitContainer}>
           <CurrencyCard />
-          <Text style={{ paddingHorizontal: SIZES.padding, fontWeight: 'bold' }}>{spendingLimit}</Text>
+          <TextInput style={{ paddingHorizontal: SIZES.padding, fontWeight: 'bold',width:'100%' }} value={limitFieldValue} onChangeText={(text)=>onLimitFieldValueChange(text)}/>
         </View>
 
         <View style={styles.line} />
@@ -44,7 +55,7 @@ const WeeklyLimit = () => {
         </View>
 
         <View style={styles.tagsContainer}>
-          <Tags />
+          <Tags setLimitFieldValue={onLimitFieldValueChange} />
         </View>
 
 
@@ -52,7 +63,7 @@ const WeeklyLimit = () => {
       </View>
       <SafeAreaView style={styles.saveButtonContainer}>
 
-        <TouchableOpacity style={styles.saveButtonWrapper}>
+        <TouchableOpacity style={styles.saveButtonWrapper} onPress={()=>saveSpendingLimit(limitFieldValue)}>
           <Text style={styles.saveText}>Save</Text>
         </TouchableOpacity>
 

@@ -10,15 +10,11 @@ const tagsList = [
     { id: 3, value: '15,000' }
 ]
 
-const Tags = () => {
-    const dispatch = useDispatch();
-
-    const setLimit =(value)=>{
-        dispatch(setSpendingLimit(value))
-      }
+const Tags = ({setLimitFieldValue}) => {
+ 
     return (
         <>
-            {tagsList.map(item => <Tag key={item.id} value={item.value} setLimit={setLimit} />)}
+            {tagsList.map(item => <Tag key={item.id} value={item.value} setLimitFieldValue={setLimitFieldValue}  />)}
 
         </>
     )
@@ -26,9 +22,9 @@ const Tags = () => {
 
 export default Tags
 
-const Tag = ({value,setLimit}) => {
+const Tag = ({value,setLimitFieldValue}) => {
     return (
-        <TouchableOpacity style={styles.container} onPress={()=>setLimit(value)}>
+        <TouchableOpacity style={styles.container} onPress={()=>setLimitFieldValue(value)}>
             <Text style={styles.currencyText}>S$ {value}</Text>
         </TouchableOpacity>
     )
