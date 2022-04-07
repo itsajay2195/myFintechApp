@@ -7,6 +7,7 @@ import Header from '../components/common/Header'
 import Card from '../components/debitScreen/Card';
 import SlidingPaneListItem from '../components/debitScreen/SlidingPaneList';
 import CurrencyCard from '../components/common/CurrencyCard';
+import { useDispatch } from 'react-redux';
 
 const Home = () => {
   const [loading, setLoading] = useState(false)

@@ -13,6 +13,7 @@
     "@react-native-community/masked-view": "^0.1.11",
     "@react-navigation/native": "6.0.6",
     "@react-navigation/stack": "6.0.11",
+    "@reduxjs/toolkit": "^1.8.1",
     "expo": "~44.0.0",
     "expo-status-bar": "~1.2.0",
     "react": "17.0.1",
@@ -25,6 +26,7 @@
     "react-native-svg": "12.1.1",
     "react-native-vector-icons": "9.0.0",
     "react-native-web": "0.17.1",
+    "react-redux": "^7.2.8",
     "rn-sliding-up-panel": "2.4.5"
   },
   "devDependencies": {
