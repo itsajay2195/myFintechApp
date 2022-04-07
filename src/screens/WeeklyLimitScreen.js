@@ -3,6 +3,7 @@ import React from 'react'
 import Header from '../components/common/Header'
 import { COLORS, PLATFORM, icons, SIZES } from '../constants'
 import CurrencyCard from '../components/common/CurrencyCard'
+import Tags from '../components/weeklyLimitScreen/Tags'
 
 const WeeklyLimit = () => {
   return (
@@ -26,7 +27,7 @@ const WeeklyLimit = () => {
 
         <View style={styles.currenyLimitContainer}>
           <CurrencyCard />
-          <Text style={{paddingHorizontal:SIZES.padding}}>5,000</Text>
+          <Text style={{paddingHorizontal:SIZES.padding, fontWeight:'bold'}}>5,000</Text>
         </View>
 
         <View style={styles.line}/>
@@ -35,6 +36,9 @@ const WeeklyLimit = () => {
             <Text style={{  color: COLORS.gray, fontSize: 12 }} numberOfLines={2}>Here weekly means the last 7 days- not the calendar week</Text>
         </View>
 
+        <View style={styles.tagsContainer}>
+            <Tags/>
+        </View>
       </View>
 
     </View>
@@ -77,8 +81,11 @@ const styles = StyleSheet.create({
   currenyLimitContainer: {
     flexDirection: 'row',
     paddingVertical:15,
-   
-    
+  },
+  tagsContainer:{
+    paddingVertical:SIZES.padding,
+    flexDirection:'row',
+    justifyContent:'space-between'
   }
 
 })

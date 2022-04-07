@@ -50,6 +50,10 @@ const ListItem = ({ title, meta, image, toggle }) => {
               thumbColor={toggleState ? COLORS.white : COLORS.white}
               ios_backgroundColor={COLORS.toggleFalseTrackColor}
               onValueChange={() => {
+                if(toggleState){
+                  setToggleState(!toggleState)
+                  return
+                }
                 setToggleState(!toggleState)
                 navigation.navigate('Limit')
               }}

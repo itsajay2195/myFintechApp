@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { View, Text,Image,TouchableOpacity,Alert, StyleSheet } from 'react-native'
-import {icons, COLORS} from '../../constants'
+import {icons, COLORS,PLATFORM} from '../../constants'
 
 export default function BottomTabs() {
     const[activeTab,setActiveTab] = useState('Debit');
@@ -36,7 +36,7 @@ export default function BottomTabs() {
 }
 
 const styles = StyleSheet.create({
-    container:{height:50,flexDirection: 'row', justifyContent: 'space-evenly', backgroundColor: COLORS.white },
+    container:{height:PLATFORM === 'android' ?50 : 100,flexDirection: 'row', justifyContent: 'space-evenly', backgroundColor: COLORS.white },
     iconWrapper:{ justifyContent: 'center',alignItems:'center'},
     iconStyle:{ tintColor: COLORS.gray, height: 20, width: 20 },
     iconNameText:{fontSize:10,color: COLORS.gray}

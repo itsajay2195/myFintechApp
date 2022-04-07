@@ -4,8 +4,9 @@ const { width, height } = Dimensions.get("window");
 export const COLORS = {
     primaryBlue: "#0C365A",
     primaryGreen: "#01D167",
+    secondaryGreen:"#DDFADF", //used to tags bg
     white: "#fff",
-    lightGreen: "#4BEE70",
+    lightGreen: "#20D167", // used for tag's text
     red: "#D84035",
     black: "#000000",
     gray: "#757575",

@@ -18,11 +18,14 @@ const Home = () => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
+      <SafeAreaView >
 
-      <View>
-        <Header showBack={false}></Header>
-      </View>
+        <View>
+          <Header showBack={false}></Header>
+        </View>
+
+      </SafeAreaView>
 
       <View style={styles.debitCardTextWrapper}>
         <Text style={styles.debitCardText}>Debit Card</Text>
@@ -34,7 +37,7 @@ const Home = () => {
 
         <View style={styles.currenyInfoWrapper}>
 
-          <CurrencyCard/>
+          <CurrencyCard />
 
           <View>
             <Text style={styles.currencyTotalText}>{loading ? '' : `  3,000`}</Text>
@@ -58,7 +61,7 @@ const Home = () => {
 
           </View>
 
-          <Card showCard= {showcard}></Card>
+          <Card showCard={showcard}></Card>
 
         </View>
 
@@ -75,7 +78,9 @@ const Home = () => {
       <View style={styles.bottomTabSectionStyle}>
         <BottomTabs />
       </View>
-    </SafeAreaView>
+
+    </View>
+
   )
 }
 
@@ -85,7 +90,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: COLORS.primaryBlue,
-    paddingTop:PLATFORM === "android" ? StatusBar.currentHeight : 0
+    paddingTop: PLATFORM === "android" ? StatusBar.currentHeight : 0
   },
   debitCardTextWrapper: {
     padding: SIZES.padding,
@@ -164,7 +169,9 @@ const styles = StyleSheet.create({
     marginTop: 150
   },
   bottomTabSectionStyle: {
-    justifyContent: 'flex-end'
+    justifyContent: 'flex-end',
+    
+   
   }
 
 })
