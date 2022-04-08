@@ -4,18 +4,20 @@ import Header from '../components/common/Header'
 import { COLORS, PLATFORM, icons, SIZES } from '../constants'
 import CurrencyCard from '../components/common/CurrencyCard'
 import Tags from '../components/weeklyLimitScreen/Tags'
-import { selectSpendingLimit,setSpendingLimit,setMenuInfo,selectMenuInfo } from '../slices/userSlice'
+import { setSpendingLimit,setMenuInfo,selectMenuInfo } from '../slices/userSlice'
 import { useSelector,useDispatch} from 'react-redux';
 import { useNavigation } from '@react-navigation/native'
+import PasswordPane from '../components/weeklyLimitScreen/PasswordPane'
 
 const WeeklyLimit = (props) => {
   const {id,toggledValue} = props.route.params;
+  const [modalVisible, setModalVisible] = useState(false);
   const menuInfo = useSelector(selectMenuInfo)
   const [limitFieldValue,onLimitFieldValueChange] = useState('')
   const dispatch = useDispatch();
   const navigation = useNavigation()
   
-
+    
     const menuInfoModifierPayload = (id)=>{
       let objIndex = menuInfo.findIndex((obj => obj.id == id));
       return {index:objIndex,value:!toggledValue}
@@ -69,9 +71,10 @@ const WeeklyLimit = (props) => {
 
 
       </View>
+      {modalVisible && <PasswordPane modalVisible={modalVisible} setModalVisible={setModalVisible} saveSpendingLimit={saveSpendingLimit} id={id} value={limitFieldValue} />}
       <SafeAreaView style={styles.saveButtonContainer}>
 
-        <TouchableOpacity style={styles.saveButtonWrapper} onPress={()=>saveSpendingLimit(limitFieldValue,id)}>
+        <TouchableOpacity style={styles.saveButtonWrapper} onPress={()=>setModalVisible(!modalVisible)}>
           <Text style={styles.saveText}>Save</Text>
         </TouchableOpacity>
 

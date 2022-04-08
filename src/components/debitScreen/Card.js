@@ -14,7 +14,7 @@ const Card = ({ showCard }) => {
     useEffect(() => {
         dispatch(setLoading(false))
         const getUserInfo = async () => {
-            const url = 'https://run.mocky.io/v3/e697fa1f-f6b3-4d28-be8a-7d651901bba9'
+            const url = 'https://run.mocky.io/v3/4ac50104-54ac-42c4-8f6b-fa385ce3b6d1'
             fetch(
                 url
             ).then((res) => res.json())
