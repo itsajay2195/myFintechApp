@@ -8,14 +8,14 @@ import Card from '../components/debitScreen/Card';
 import SlidingPaneListItem from '../components/debitScreen/SlidingPaneList';
 import CurrencyCard from '../components/common/CurrencyCard';
 import { useSelector } from 'react-redux';
-import { selectLoading,selectSpendingLimit } from '../slices/userSlice'
+import { selectLoading, selectSpendingLimit } from '../slices/userSlice'
 import Bar from '../components/debitScreen/Bar';
 
 const Home = () => {
   const [showcard, setShowCard] = useState(true)
   const loading = useSelector(selectLoading)
   const spendingLimit = useSelector(selectSpendingLimit)
-  
+
 
 
   const draggableRange = {
@@ -77,19 +77,19 @@ const Home = () => {
 
           <View style={styles.slideupContent}>
             {spendingLimit &&
-            <>
-             <View style={styles.spendingLimitWrapper}>
-                <Text style={{fontSize:12}}>Debit card spending limit</Text>
-                <Text style={{color:COLORS.gray, fontSize:12}}><Text style={{color:COLORS.primaryGreen,fontWeight:'bold'}}>$345 </Text>| ${spendingLimit}</Text>
-            </View>
+              <>
+                <View style={styles.spendingLimitWrapper}>
+                  <Text style={{ fontSize: 12 }}>Debit card spending limit</Text>
+                  <Text style={{ color: COLORS.gray, fontSize: 12 }}><Text style={{ color: COLORS.primaryGreen, fontWeight: 'bold' }}>$345 </Text>| ${spendingLimit}</Text>
+                </View>
 
-            <View style={{padding:5}}>
-              <Bar></Bar>
-            </View>
-            </>
-           
-            }  
-            
+                <View style={{ padding: 5 }}>
+                  <Bar></Bar>
+                </View>
+              </>
+
+            }
+
             <SlidingPaneListItem spendingLimit={spendingLimit}></SlidingPaneListItem>
           </View>
 
@@ -180,7 +180,6 @@ const styles = StyleSheet.create({
   slidingUpPanelStyle: {
     flex: 1,
     padding: SIZES.padding,
-    // borderWidth: 5,
     marginTop: 50,
     backgroundColor: COLORS.white,
     borderTopLeftRadius: SIZES.radius,
@@ -190,10 +189,10 @@ const styles = StyleSheet.create({
   slideupContent: {
     marginTop: 150
   },
-  spendingLimitWrapper:{
+  spendingLimitWrapper: {
     paddingHorizontal: 5,
-    flexDirection:'row',
-    justifyContent:'space-between'
+    flexDirection: 'row',
+    justifyContent: 'space-between'
   },
   bottomTabSectionStyle: {
     justifyContent: 'flex-end',

@@ -1,26 +1,26 @@
-import { Alert, Modal, StyleSheet, Text, Pressable, View,TextInput } from 'react-native'
-import React,{useState} from 'react'
-import {FONTS,SIZES,COLORS} from "../../constants"
-import { selectUserInfo} from '../../slices/userSlice'
-import { useSelector} from 'react-redux';
+import { Alert, Modal, StyleSheet, Text, Pressable, View, TextInput } from 'react-native'
+import React, { useState } from 'react'
+import { COLORS } from "../../constants"
+import { selectUserInfo } from '../../slices/userSlice'
+import { useSelector } from 'react-redux';
 
 
 
 
-const PasswordPane = ({modalVisible,setModalVisible,saveSpendingLimit,id,value}) => {
-  const [pin,setPin] = useState('')
+const PasswordPane = ({ modalVisible, setModalVisible, saveSpendingLimit, id, value }) => {
+  const [pin, setPin] = useState('')
   const [invalidPin, setInvalidPin] = useState(false)
   const userInfo = useSelector(selectUserInfo)
 
-  const submit = (id,value) =>{
-    
+  const submit = (id, value) => {
+
     setModalVisible(!modalVisible)
-    saveSpendingLimit(value,id)
+    saveSpendingLimit(value, id)
   }
-  
+
 
   return (
-    
+
     <Modal
       animationType="slide"
       transparent={true}
@@ -33,22 +33,22 @@ const PasswordPane = ({modalVisible,setModalVisible,saveSpendingLimit,id,value})
       <View style={styles.centeredView}>
         <View style={styles.modalView}>
           <View style={styles.textInputContainer}>
-             <TextInput secureTextEntry={true} style={styles.textInput} value={pin} onChangeText={(text)=>setPin(text)} />
+            <TextInput secureTextEntry={true} style={styles.textInput} value={pin} onChangeText={(text) => setPin(text)} />
           </View>
-          {invalidPin &&<Text style={{color:'#FF0000'}}>Wrong pin!</Text>}
+          {invalidPin && <Text style={{ color: '#FF0000' }}>Wrong pin!</Text>}
           <View style={styles.buttonsContainer}>
             <Pressable
               style={[styles.button, styles.buttonSubmit]}
-              onPress={() => userInfo.pin === pin ? submit(id,value) : setInvalidPin(!invalidPin)}
+              onPress={() => userInfo.pin === pin ? submit(id, value) : setInvalidPin(!invalidPin)}
             >
-              <Text style={[styles.textStyle,{color:COLORS.primaryBlue}]}>submit</Text>
+              <Text style={[styles.textStyle, { color: COLORS.primaryBlue }]}>submit</Text>
             </Pressable>
           </View>
           <Pressable
             style={[styles.button, styles.buttonClose]}
             onPress={() => setModalVisible(!modalVisible)}
           >
-            <Text style={[styles.textStyle,{color:COLORS.lightGreen}]}>cancel</Text>
+            <Text style={[styles.textStyle, { color: COLORS.lightGreen }]}>cancel</Text>
           </Pressable>
         </View>
       </View>
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor:'transparent'
+    backgroundColor: 'transparent'
   },
   modalView: {
     margin: 20,
@@ -81,22 +81,22 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 5
   },
-  textInputContainer:{
-    flexDirection:'row',
-    justifyContent:'space-around'
+  textInputContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around'
   },
-  textInput:{
-    fontSize:20,
-    margin:5,
-    height:20,
-    width:'20%',
-    borderBottomWidth:0.5,
-    color:COLORS.white,
-    textAlign:'center',
-    borderColor:COLORS.gray
+  textInput: {
+    fontSize: 20,
+    margin: 5,
+    height: 20,
+    width: '20%',
+    borderBottomWidth: 0.5,
+    color: COLORS.white,
+    textAlign: 'center',
+    borderColor: COLORS.gray
   },
-  buttonsContainer:{
-    margin:10
+  buttonsContainer: {
+    margin: 10
   },
   button: {
     borderRadius: 20,
@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
   buttonClose: {
     backgroundColor: COLORS.white,
   },
-  buttonSubmit:{
+  buttonSubmit: {
     backgroundColor: COLORS.lightGreen,
   },
   textStyle: {

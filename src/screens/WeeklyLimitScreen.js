@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, SafeAreaView, StatusBar, Image, TextInput, TouchableOpacity, Alert,ScrollView } from 'react-native'
+import { StyleSheet, Text, View, SafeAreaView, StatusBar, Image, TextInput, TouchableOpacity, Alert, ScrollView } from 'react-native'
 import React, { useState } from 'react'
 import Header from '../components/common/Header'
 import { COLORS, PLATFORM, icons, SIZES } from '../constants'
@@ -70,9 +70,9 @@ const WeeklyLimit = (props) => {
         </View>
 
         <ScrollView>
-          <Text numberOfLines={2} style={{textAlign:'center', fontSize: 16, fontWeight: 'bold' }}>Your Expense Graph For Last 4 months </Text>
+          <Text numberOfLines={2} style={{ textAlign: 'center', fontSize: 16, fontWeight: 'bold' }}>Your spent analysis for the last 4 months </Text>
           <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-            <BarChart/>
+            <BarChart />
           </View>
         </ScrollView>
 
@@ -82,7 +82,7 @@ const WeeklyLimit = (props) => {
       {modalVisible && <PasswordPane modalVisible={modalVisible} setModalVisible={setModalVisible} saveSpendingLimit={saveSpendingLimit} id={id} value={limitFieldValue} />}
       <SafeAreaView style={styles.saveButtonContainer}>
 
-        <TouchableOpacity  disabled={true} style={[styles.saveButton,{backgroundColor:limitFieldValue === '' ? COLORS.lightGray : COLORS.primaryGreen}]} onPress={() => setModalVisible(!modalVisible)}>
+        <TouchableOpacity disabled={!limitFieldValue} style={[styles.saveButton, { backgroundColor: limitFieldValue === '' ? COLORS.lightGray : COLORS.primaryGreen }]} onPress={() => setModalVisible(!modalVisible)}>
           <Text style={styles.saveText}>Save</Text>
         </TouchableOpacity>
 
@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
   line: {
     borderBottomWidth: PLATFORM === 'ios' ? 0.3 : 0.5,
     borderBottomColor: 'gray',
-    marginVertical: 10
+    marginBottom: 10
   },
   currenyLimitContainer: {
     flexDirection: 'row',

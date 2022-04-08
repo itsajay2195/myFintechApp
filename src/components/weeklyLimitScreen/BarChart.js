@@ -2,7 +2,7 @@ import { StyleSheet, View, ActivityIndicator } from 'react-native'
 import React, { useEffect } from 'react'
 import { VictoryChart, VictoryTheme, VictoryBar } from "victory-native";
 import { useDispatch, useSelector } from 'react-redux';
-import { SIZES,COLORS } from '../../constants';
+import { SIZES, COLORS } from '../../constants';
 import { setLoading, setExpenseInfo, selectLoading, selectExpenseInfo } from '../../slices/userSlice'
 
 const BarChart = () => {
@@ -31,7 +31,7 @@ const BarChart = () => {
     return (
         <>
             {loading ?
-                <View style={{ marginTop:20, justifyContent: 'center', alignSelf: 'center' }}>
+                <View style={{ marginTop: 20, justifyContent: 'center', alignSelf: 'center' }}>
                     <ActivityIndicator size="small" color={COLORS.primaryGreen} />
                 </View>
 

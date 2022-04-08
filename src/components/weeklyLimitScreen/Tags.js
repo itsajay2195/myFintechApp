@@ -1,8 +1,6 @@
 import { StyleSheet, Text, TouchableOpacity } from 'react-native'
 import React from 'react'
-import {  COLORS, SIZES } from '../../constants'
-import { setSpendingLimit } from '../../slices/userSlice'
-import { useDispatch } from 'react-redux';
+import { COLORS, SIZES } from '../../constants'
 
 const tagsList = [
     { id: 1, value: '5,000' },
@@ -10,11 +8,11 @@ const tagsList = [
     { id: 3, value: '15,000' }
 ]
 
-const Tags = ({setLimitFieldValue}) => {
- 
+const Tags = ({ setLimitFieldValue }) => {
+
     return (
         <>
-            {tagsList.map(item => <Tag key={item.id} value={item.value} setLimitFieldValue={setLimitFieldValue}  />)}
+            {tagsList.map(item => <Tag key={item.id} value={item.value} setLimitFieldValue={setLimitFieldValue} />)}
 
         </>
     )
@@ -22,9 +20,9 @@ const Tags = ({setLimitFieldValue}) => {
 
 export default Tags
 
-const Tag = ({value,setLimitFieldValue}) => {
+const Tag = ({ value, setLimitFieldValue }) => {
     return (
-        <TouchableOpacity style={styles.container} onPress={()=>setLimitFieldValue(value)}>
+        <TouchableOpacity style={styles.container} onPress={() => setLimitFieldValue(value)}>
             <Text style={styles.currencyText}>S$ {value}</Text>
         </TouchableOpacity>
     )
