@@ -54,7 +54,7 @@
 - install the "Expo Go" on your real device from the app/ play store.
 - upon installation of "Expo Go", visit the project link and scan the qr code.
 - The app will be up and running.
-  project url: https://expo.dev/@ajaycnv/assignment
+  project url: https://expo.dev/@ajaycnv/aspireFintech
 
 
 ## About the project

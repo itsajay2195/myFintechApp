@@ -48,8 +48,8 @@ const Card = ({ showCard }) => {
                         </View>
 
                         <View>
-                            <Text style={styles.cardDetails}>{showCard ? userInfo.card_no : userInfo.card_no.replace(/\d{4}(?= \d{4})/g, "****")}</Text>
-                            <Text style={[styles.cardDetails, { fontSize: SIZES.body5 }]}>Thru:{userInfo.thru}  CVV:{userInfo.cvv}</Text>
+                            <Text style={[styles.cardDetails,{fontSize:SIZES.h4}]}>{showCard ? userInfo.card_no : userInfo.card_no.replace(/\d{4}(?= \d{4})/g, "****")}</Text>
+                            <Text style={[styles.cardDetails, { fontSize: SIZES.h5 }]}>Thru:{userInfo.thru}  CVV:{userInfo.cvv}</Text>
                         </View>
 
                         <View style={styles.topLogo}>
@@ -84,13 +84,13 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-end'
     },
     cardHolderName: {
-        paddingTop: 10,
+        paddingTop: SIZES.padding/2,
         fontSize: SIZES.h2,
         color: COLORS.white,
         fontWeight: 'bold'
     },
     cardDetails: {
-        paddingTop: 10,
+        paddingTop: SIZES.padding/2,
         fontSize: SIZES.body3,
         color: COLORS.white,
         fontWeight: 'bold'

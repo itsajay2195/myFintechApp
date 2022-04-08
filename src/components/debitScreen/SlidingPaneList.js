@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, Image, Switch, Alert } from 'react-native'
 import React from 'react'
-import { COLORS } from '../../constants'
+import { COLORS,SIZES } from '../../constants'
 import { useNavigation } from '@react-navigation/native'
 import { useDispatch, useSelector } from 'react-redux';
 import { selectMenuInfo, setMenuInfo, setSpendingLimit } from '../../slices/userSlice'
@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    padding: 10
+    padding: SIZES.padding/2
   },
   menuInfoWrapper: {
     width: '80%'

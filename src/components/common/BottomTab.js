@@ -36,7 +36,7 @@ export default function BottomTabs() {
 }
 
 const styles = StyleSheet.create({
-  container: { height: PLATFORM === 'android' ? 50 : 100, flexDirection: 'row', justifyContent: 'space-evenly', backgroundColor: COLORS.white },
+  container: { height: PLATFORM === 'android' ? 50 : 100, flexDirection: 'row', justifyContent: 'space-evenly', backgroundColor: COLORS.white }, //this conditional value is done inorder to take care of the SafeAreaView on android.
   iconWrapper: { justifyContent: 'center', alignItems: 'center' },
   iconStyle: { tintColor: COLORS.gray, height: 20, width: 20 },
   iconNameText: { fontSize: 10, color: COLORS.gray }
