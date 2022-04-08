@@ -106,4 +106,7 @@
         - The user modal and save operation can be cancelled by clicking the "cancel button" on the modal.
      # 2. Pictorial representation of the expense History.
         - This pictorial representation of the expense History comes in handy by which the user can easily keep track of his previous expeses and compare his/her cash flow.
-        - The also allows the user to control his/her cash flows.
+        - The also allows the user to control his/her cash flows.![ezgif com-gif-maker (1)](https://user-images.githubusercontent.com/47854133/162360046-4e46795e-88d4-4f08-85e3-4444b905d114.gif)
+
+
+
