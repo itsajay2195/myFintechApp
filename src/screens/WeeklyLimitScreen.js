@@ -1,38 +1,39 @@
-import { StyleSheet, Text, View, SafeAreaView, StatusBar, Image,TextInput,TouchableOpacity,Alert } from 'react-native'
+import { StyleSheet, Text, View, SafeAreaView, StatusBar, Image, TextInput, TouchableOpacity, Alert,ScrollView } from 'react-native'
 import React, { useState } from 'react'
 import Header from '../components/common/Header'
 import { COLORS, PLATFORM, icons, SIZES } from '../constants'
 import CurrencyCard from '../components/common/CurrencyCard'
 import Tags from '../components/weeklyLimitScreen/Tags'
-import { setSpendingLimit,setMenuInfo,selectMenuInfo } from '../slices/userSlice'
-import { useSelector,useDispatch} from 'react-redux';
+import { setSpendingLimit, setMenuInfo, selectMenuInfo } from '../slices/userSlice'
+import { useSelector, useDispatch } from 'react-redux';
 import { useNavigation } from '@react-navigation/native'
 import PasswordPane from '../components/weeklyLimitScreen/PasswordPane'
+import BarChart from '../components/weeklyLimitScreen/BarChart'
 
 const WeeklyLimit = (props) => {
-  const {id,toggledValue} = props.route.params;
+  const { id, toggledValue } = props.route.params;
   const [modalVisible, setModalVisible] = useState(false);
   const menuInfo = useSelector(selectMenuInfo)
-  const [limitFieldValue,onLimitFieldValueChange] = useState('')
+  const [limitFieldValue, onLimitFieldValueChange] = useState('')
   const dispatch = useDispatch();
   const navigation = useNavigation()
-  
-    
-    const menuInfoModifierPayload = (id)=>{
-      let objIndex = menuInfo.findIndex((obj => obj.id == id));
-      return {index:objIndex,value:!toggledValue}
+
+
+  const menuInfoModifierPayload = (id) => {
+    let objIndex = menuInfo.findIndex((obj => obj.id == id));
+    return { index: objIndex, value: !toggledValue }
+  }
+  const saveSpendingLimit = (val, id) => {
+    let num = parseFloat(val.replace(',', ''))//  this is basically done to check if the user inputted number is less than 0 or not
+    if (num < 0) {
+      Alert.alert('Amount cannot be less than Zero')
     }
-    const saveSpendingLimit =(val,id)=>{
-        let num = parseFloat(val.replace(',', ''))//  this is basically done to check if the user inputted number is less than 0 or not
-        if(num < 0){
-          Alert.alert('Amount cannot be less than Zero') 
-        }
-        let decimalStrippedValue = val.includes(".") ? val.split(".")[0] : val // this will strip the contents after the decimal point
-        dispatch(setSpendingLimit(decimalStrippedValue))
-         menuInfoModifierPayload(id)
-        dispatch( setMenuInfo(menuInfoModifierPayload(id)))
-        navigation.navigate('Home')
-      }
+    let decimalStrippedValue = val.includes(".") ? val.split(".")[0] : val // this will strip the contents after the decimal point
+    dispatch(setSpendingLimit(decimalStrippedValue))
+    menuInfoModifierPayload(id)
+    dispatch(setMenuInfo(menuInfoModifierPayload(id)))
+    navigation.navigate('Home')
+  }
 
   return (
     <View style={styles.container}>
@@ -55,7 +56,7 @@ const WeeklyLimit = (props) => {
 
         <View style={styles.currenyLimitContainer}>
           <CurrencyCard />
-          <TextInput style={{ paddingHorizontal: SIZES.padding, fontWeight: 'bold',width:'100%' }} value={limitFieldValue} onChangeText={(text)=>onLimitFieldValueChange(text)}/>
+          <TextInput style={{ paddingHorizontal: SIZES.padding, fontWeight: 'bold', width: '100%' }} value={limitFieldValue} onChangeText={(text) => onLimitFieldValueChange(text)} />
         </View>
 
         <View style={styles.line} />
@@ -68,13 +69,20 @@ const WeeklyLimit = (props) => {
           <Tags setLimitFieldValue={onLimitFieldValueChange} />
         </View>
 
-
+        <ScrollView>
+          <Text numberOfLines={2} style={{textAlign:'center', fontSize: 16, fontWeight: 'bold' }}>Your Expense Graph For Last 4 months </Text>
+          <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+            <BarChart/>
+          </View>
+        </ScrollView>
 
       </View>
+
+
       {modalVisible && <PasswordPane modalVisible={modalVisible} setModalVisible={setModalVisible} saveSpendingLimit={saveSpendingLimit} id={id} value={limitFieldValue} />}
       <SafeAreaView style={styles.saveButtonContainer}>
 
-        <TouchableOpacity style={styles.saveButtonWrapper} onPress={()=>setModalVisible(!modalVisible)}>
+        <TouchableOpacity  disabled={true} style={[styles.saveButton,{backgroundColor:limitFieldValue === '' ? COLORS.lightGray : COLORS.primaryGreen}]} onPress={() => setModalVisible(!modalVisible)}>
           <Text style={styles.saveText}>Save</Text>
         </TouchableOpacity>
 
@@ -125,22 +133,19 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between'
   },
-  saveButtonContainer:{
+  saveButtonContainer: {
     backgroundColor: 'white',
     justifyContent: 'flex-end',
     paddingBottom: PLATFORM === "android" ? StatusBar.currentHeight : 0
   },
-  saveButtonWrapper:{ 
-    alignSelf: 'center', 
-    justifyContent: 'center', 
-    alignItems: 'center', 
-    flexDirection: 'row', 
+  saveButton: {
+    alignSelf: 'center',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
     height: 60, width: '80%',
-    backgroundColor: 
-    COLORS.primaryGreen, 
     borderRadius: 50,
-    
   },
-  saveText:{ color: COLORS.white,fontSize:SIZES.h3, fontWeight:'bold' }
+  saveText: { color: COLORS.white, fontSize: SIZES.h3, fontWeight: 'bold' }
 
 })

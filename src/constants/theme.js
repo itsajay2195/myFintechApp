@@ -8,6 +8,7 @@ export const COLORS = {
     white: "#fff",
     lightGreen: "#20D167", // used for tag's text
     gray: "#757575",
+    lightGray:'#DCDCDC',
     toggleTrueTrackColor: '#0C365A',
     toggleFalseTrackColor: '#C1C1C1',
 };

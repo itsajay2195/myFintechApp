@@ -27,7 +27,8 @@
     "react-native-vector-icons": "9.0.0",
     "react-native-web": "0.17.1",
     "react-redux": "^7.2.8",
-    "rn-sliding-up-panel": "2.4.5"
+    "rn-sliding-up-panel": "2.4.5",
+    "victory-native": "36.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"

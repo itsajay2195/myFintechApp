@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, Image, Switch, Alert } from 'react-native'
 import React, { useState } from 'react'
-import { COLORS, icons } from '../../constants'
+import { COLORS } from '../../constants'
 import { useNavigation } from '@react-navigation/native'
 import { useDispatch,useSelector } from 'react-redux';
 import { selectMenuInfo,setMenuInfo,setSpendingLimit } from '../../slices/userSlice'
