@@ -13,7 +13,8 @@ const initialState = {
         {id:3, image: icons.freeze, title: 'Freeze card', meta: 'Your Debit card is currently active', toggle: null },
         {id:4, image: icons.newCard, title: 'Get a new card ', meta: 'This activates your current debit card', toggle: false },
         {id:5, image: icons.deactivate, title: 'Deactivated cards', meta: 'This deactivates your current debit card', toggle: false },
-      ]
+    ],
+    expenseInfo:[]
 }
 
 export const userSlice = createSlice({
@@ -32,12 +33,16 @@ export const userSlice = createSlice({
         },
         setMenuInfo: (state,action) =>{
             state.menuInfo[action.payload.index].isToggled = action.payload.value
+        },
+        setExpenseInfo :(state,action) =>{
+            state.expenseInfo =action.payload
+            state.loading = false
         }
 
     }
 });
 
-export const { setLoading, setUserInfo ,setSpendingLimit,setMenuInfo} = userSlice.actions
+export const { setLoading, setUserInfo ,setSpendingLimit,setMenuInfo,setExpenseInfo} = userSlice.actions
 
 // selectors -> they are used to grab info from the state
 
@@ -45,5 +50,6 @@ export const selectUserInfo = state => state.user.userInfo
 export const selectLoading = state => state.user.loading
 export const selectSpendingLimit = state => state.user.spendingLimit
 export const selectMenuInfo = state => state.user.menuInfo
+export const selectExpenseInfo = state => state.user.expenseInfo
 
 export default userSlice.reducer
