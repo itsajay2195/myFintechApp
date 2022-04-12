@@ -10,6 +10,10 @@ import CurrencyCard from '../components/common/CurrencyCard';
 import { useSelector } from 'react-redux';
 import { selectLoading, selectSpendingLimit } from '../slices/userSlice'
 import Bar from '../components/debitScreen/Bar';
+import Svg, { 
+  Circle, Ellipse, G, TSpan, TextPath, Path, Polygon, Polyline, Line, Rect, Use,  Symbol, Defs, LinearGradient, RadialGradient, Stop, ClipPath, Pattern, Mask 
+} from 'react-native-svg'
+
 
 const Home = () => {
   const [showcard, setShowCard] = useState(true)
@@ -42,6 +46,18 @@ const Home = () => {
       <View style={styles.debitSectionStyle}>
 
         <Text style={{ color: COLORS.white }}>Available balance</Text>
+        <View>
+          <Svg viewBox="0 0 24 24" width="21" height="21">
+            <Path
+              class="b"
+              fill="#01d167" d="M23.5,213.333H.5a.474.474,0,0,0-.5.5v7.053a2.485,2.485,0,0,0,2.5,2.519h19a2.485,2.485,0,0,0,2.5-2.519v-7.053A.474.474,0,0,0,23.5,213.333Zm-20,4.03h4a.5.5,0,0,1,0,1.008h-4a.5.5,0,0,1,0-1.008Zm7,3.023h-7a.5.5,0,0,1,0-1.008h7a.5.5,0,0,1,0,1.008Zm8.5,0a1.68,1.68,0,0,1-1-.3,1.68,1.68,0,0,1-1,.3,2.015,2.015,0,0,1,0-4.03,1.68,1.68,0,0,1,1,.3,1.68,1.68,0,0,1,1-.3,2.015,2.015,0,0,1,0,4.03Z"
+            />
+            <Path
+              class="b"
+              fill="##01d167" d="M21.5,85.333H2.5c-1.4,0-2.5,1.378-2.5,3.132v1.253c0,.376.2.626.5.626h23c.3,0,.5-.251.5-.626V88.465C24,86.711,22.9,85.333,21.5,85.333Z"
+            />
+          </Svg>
+        </View>
 
         <View style={styles.currenyInfoWrapper}>
 

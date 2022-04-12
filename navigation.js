@@ -1,6 +1,5 @@
 
 import React from 'react'
-import {Image} from 'react-native'
 import ComingSoon from './src/components/common/ComingSoon'
 import Home from './src/screens/DebitScreen'
 import { COLORS , icons} from './src/constants'
@@ -10,7 +9,7 @@ import { NavigationContainer } from '@react-navigation/native'
 import { Provider } from 'react-redux'
 import { store } from './store'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-
+import {SvgLogo,SvgCard,SvgPayment,SvgCredit,SvgAccount} from './src/assets/svgs'
 
 
 
@@ -23,18 +22,19 @@ export default function RootNavigation() {
         headerTransparent: true,
         headerBackTitleVisible: false,
         tabBarActiveTintColor: COLORS.primaryGreen,
-        tabBarInactiveTintColor: COLORS.gray,
+        tabBarInactiveTintColor: COLORS.lightGray,
     }
 
     return (
         <Provider store={store}>
             <NavigationContainer tabBar={(props) => <MyTabBar {...props} />}>
                 <Tab.Navigator initialRouteName="Debit Card" screenOptions={screenOptions}  >
-                    <Tab.Screen name='Home' component={ComingSoon} options={{tabBarIcon:({color})=><Image source={icons.logo} style={{ tintColor: color, height: 20, width: 20 }} />}}/>    
-                    <Tab.Screen name='Debit Card' component={Home} options={{tabBarIcon:({color})=><Image source={icons.card} style={{ tintColor: color, height: 20, width: 20 }} />}} />
-                    <Tab.Screen name='Payments' component={ComingSoon} options={{tabBarIcon:({color})=><Image source={icons.payments} style={{ tintColor: color, height: 20, width: 20 }} />}}/>
-                    <Tab.Screen name='Credit' component={ComingSoon} options={{tabBarIcon:({color})=><Image source={icons.credit} style={{ tintColor: color, height: 20, width: 20 }} />}}/>
-                    <Tab.Screen name='Profile' component={ComingSoon} options={{tabBarIcon:({color})=><Image source={icons.account} style={{ tintColor: color, height: 20, width: 20 }} />}}/>
+                    {/* <Tab.Screen name='Home' component={ComingSoon} options={{tabBarIcon:({color})=><SvgUri width="100%" height="100%" source='https://dev.w3.org/SVG/tools/svgweb/samples/svg-files/debian.svg' />}}/> */}
+                    <Tab.Screen name='Home' component={ComingSoon} options={{tabBarIcon:({color})=><SvgLogo color={color}/>}} />    
+                    <Tab.Screen name='Debit Card' component={Home}  options={{tabBarIcon:({color})=><SvgCard color={color}/>}} />  
+                    <Tab.Screen name='Payments' component={ComingSoon}  options={{tabBarIcon:({color})=><SvgPayment color={color}/>}} />  
+                    <Tab.Screen name='Credit' component={ComingSoon}  options={{tabBarIcon:({color})=><SvgCredit color={color}/>}} />  
+                    <Tab.Screen name='Profile' component={ComingSoon}  options={{tabBarIcon:({color})=><SvgAccount color={color}/>}} />  
                     
                 </Tab.Navigator>
             </NavigationContainer>
