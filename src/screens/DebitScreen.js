@@ -97,10 +97,6 @@ const Home = () => {
 
       </SlidingUpPanel>
 
-      <View style={styles.bottomTabSectionStyle}>
-        <BottomTabs />
-      </View>
-
     </View>
 
   )
