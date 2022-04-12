@@ -10,7 +10,7 @@ const Header = ({ showBack }) => {
         <View style={styles.container}>
 
             <View style={styles.iconWrapper}>
-                {showBack && <MaterialCommunityIcons onPress={() => navigation.navigate('Home')} name="chevron-left" size={30} color="#fff" />}
+                {showBack && <MaterialCommunityIcons onPress={() => navigation.navigate('Debit Card')} name="chevron-left" size={30} color="#fff" />}
             </View>
 
             <View style={styles.iconWrapper}>
