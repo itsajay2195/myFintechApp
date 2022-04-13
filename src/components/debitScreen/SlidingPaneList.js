@@ -3,7 +3,7 @@ import React from 'react'
 import { COLORS,SIZES } from '../../constants'
 import { useNavigation } from '@react-navigation/native'
 import { useDispatch, useSelector } from 'react-redux';
-import { selectMenuInfo, setMenuInfo, setSpendingLimit } from '../../slices/userSlice'
+import { selectMenuInfo, setMenuInfo, setSpendingLimit } from '../../redux/userSlice'
 
 
 const SlidingPaneList = ({ spendingLimit }) => {

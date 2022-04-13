@@ -5,7 +5,8 @@ import { icons } from '../constants'
 
 const initialState = {
     loading: false,
-    userInfo: [],
+    error:false,
+    userInfo: null,
     spendingLimit: null, // this state is locally maintained, just for the assignment puropse. The implemntation will be different in real world use case
     menuInfo: [
         { id: 1, image: icons.insight, title: 'Top-up-account', meta: 'Deposit money to your account to use with card', toggle: false },
@@ -22,7 +23,7 @@ export const userSlice = createSlice({
     initialState,
     reducers: {
         setLoading: (state, action) => {
-            state.loading = true
+            state.loading = action.payload
         },
         setUserInfo: (state, action) => {
             state.userInfo = action.payload
@@ -37,8 +38,7 @@ export const userSlice = createSlice({
         setExpenseInfo: (state, action) => {
             state.expenseInfo = action.payload
             state.loading = false
-        }
-
+        },
     }
 });
 

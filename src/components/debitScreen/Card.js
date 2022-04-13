@@ -1,26 +1,45 @@
-import { StyleSheet, Text, View, Image, ActivityIndicator } from 'react-native'
+import { StyleSheet, Text, View, Image, ActivityIndicator,Alert } from 'react-native'
 import React, { useEffect } from 'react'
 import { icons, COLORS, SIZES } from '../../constants'
 import { useDispatch, useSelector } from 'react-redux';
-import { setUserInfo, setLoading, selectUserInfo, selectLoading } from '../../slices/userSlice'
+import { setUserInfo, setLoading, selectUserInfo, selectLoading } from '../../redux/userSlice'
 import {SvgVisaLogo,SvgAspireLogo} from '../../assets/svgs'
 
+
+const STATIC_CARD_INFO = {
+    "available_balance":"",
+    card_info:{
+    "card_holder":"-----------",
+    "cvv":"---",
+    "thru":"--/--",
+    "card_number":"---- ---- ---- ----"
+    }
+}
+
 const Card = ({ showCard }) => {
+  
     const dispatch = useDispatch();
-    const userInfo = useSelector(selectUserInfo)
+    const userInfo = useSelector(selectUserInfo) || STATIC_CARD_INFO
+    const {card_holder,card_number,cvv,thru} = userInfo.card_info
     const loading = useSelector(selectLoading)
-
-
+    
     useEffect(() => {
-        dispatch(setLoading(false))
+        
+          
+        dispatch(setLoading(true))
         const getUserInfo = async () => {
-            const url = 'https://run.mocky.io/v3/4ac50104-54ac-42c4-8f6b-fa385ce3b6d1'
+            const url = 'api/user/1'
             fetch(
                 url
             ).then((res) => res.json())
-                .then((data) => {
+                .then((json) => {
                     dispatch(setLoading(false))
-                    dispatch(setUserInfo(data))
+                    dispatch(setUserInfo(json.data))
+                }).catch(e=>{ 
+                    Alert.alert("Something went wrong")
+                    dispatch(setLoading(false))
+                    dispatch(setError(null)) 
+                    dispatch(setUserInfo(null))
                 })
 
         }
@@ -30,9 +49,9 @@ const Card = ({ showCard }) => {
     }, [])
 
     return (
+        
         <>
-
-
+        
             <View style={styles.container}>
                 {loading ?
                     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -45,12 +64,12 @@ const Card = ({ showCard }) => {
                         </View>
 
                         <View>
-                            <Text style={styles.cardHolderName}>{userInfo.username}</Text>
+                            <Text style={styles.cardHolderName}>{card_holder}</Text>
                         </View>
 
                         <View>
-                            <Text style={[styles.cardDetails,{fontSize:SIZES.h4}]}>{showCard ? userInfo.card_no : userInfo.card_no.replace(/\d{4}(?= \d{4})/g, "****")}</Text>
-                            <Text style={[styles.cardDetails, { fontSize: SIZES.h5 }]}>Thru:{userInfo.thru}  CVV:{userInfo.cvv}</Text>
+                            <Text style={[styles.cardDetails,{fontSize:SIZES.h4}]}>{showCard ? card_number : card_number.replace(/\d{4}(?= \d{4})/g, "****")}</Text>
+                            <Text style={[styles.cardDetails, { fontSize: SIZES.h5 }]}>Thru:{thru}  CVV:{cvv}</Text>
                         </View>
 
                         <View style={styles.topLogo}>

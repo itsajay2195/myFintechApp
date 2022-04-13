@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import { VictoryChart, VictoryTheme, VictoryBar } from "victory-native";
 import { useDispatch, useSelector } from 'react-redux';
 import { SIZES, COLORS } from '../../constants';
-import { setLoading, setExpenseInfo, selectLoading, selectExpenseInfo } from '../../slices/userSlice'
+import { setLoading, setExpenseInfo, selectLoading, selectExpenseInfo } from '../../redux/userSlice'
 
 const BarChart = () => {
     const dispatch = useDispatch();

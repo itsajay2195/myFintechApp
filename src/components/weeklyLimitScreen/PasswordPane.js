@@ -1,7 +1,7 @@
 import { Alert, Modal, StyleSheet, Text, Pressable, View, TextInput } from 'react-native'
 import React, { useState } from 'react'
 import { COLORS } from "../../constants"
-import { selectUserInfo } from '../../slices/userSlice'
+import { selectUserInfo } from '../../redux/userSlice'
 import { useSelector } from 'react-redux';
 
 

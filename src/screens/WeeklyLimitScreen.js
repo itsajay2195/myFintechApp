@@ -4,7 +4,7 @@ import Header from '../components/common/Header'
 import { COLORS, PLATFORM, icons, SIZES } from '../constants'
 import CurrencyCard from '../components/common/CurrencyCard'
 import Tags from '../components/weeklyLimitScreen/Tags'
-import { setSpendingLimit, setMenuInfo, selectMenuInfo } from '../slices/userSlice'
+import { setSpendingLimit, setMenuInfo, selectMenuInfo } from '../redux/userSlice'
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigation } from '@react-navigation/native'
 import PasswordPane from '../components/weeklyLimitScreen/PasswordPane'
