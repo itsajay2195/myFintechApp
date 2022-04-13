@@ -9,6 +9,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useNavigation } from '@react-navigation/native'
 import PasswordPane from '../components/weeklyLimitScreen/PasswordPane'
 import BarChart from '../components/weeklyLimitScreen/BarChart'
+import PrimaryButton from '../components/common/PrimaryButton'
 
 const WeeklyLimit = (props) => {
   const { id, toggledValue } = props.route.params;
@@ -32,9 +33,12 @@ const WeeklyLimit = (props) => {
     dispatch(setSpendingLimit(decimalStrippedValue))
     menuInfoModifierPayload(id)
     dispatch(setMenuInfo(menuInfoModifierPayload(id)))
-    navigation.navigate('Home')
+    navigation.navigate('Debit Card')
   }
 
+  const onSaveClick =()=>{
+    setModalVisible(!modalVisible)
+  }
   return (
     <View style={styles.container}>
 
@@ -82,9 +86,7 @@ const WeeklyLimit = (props) => {
       {modalVisible && <PasswordPane modalVisible={modalVisible} setModalVisible={setModalVisible} saveSpendingLimit={saveSpendingLimit} id={id} value={limitFieldValue} />}
       <SafeAreaView style={styles.saveButtonContainer}>
 
-        <TouchableOpacity disabled={!limitFieldValue} style={[styles.saveButton, { backgroundColor: limitFieldValue === '' ? COLORS.lightGray : COLORS.primaryGreen }]} onPress={() => setModalVisible(!modalVisible)}>
-          <Text style={styles.saveText}>Save</Text>
-        </TouchableOpacity>
+        <PrimaryButton isDisabled={!limitFieldValue} height={60} width="80%" onPress={onSaveClick} btnText={"Save"}/>
 
       </SafeAreaView>
     </View>
@@ -138,14 +140,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     paddingBottom: PLATFORM === "android" ? StatusBar.currentHeight : 0
   },
-  saveButton: {
-    alignSelf: 'center',
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection: 'row',
-    height: 60, width: '80%',
-    borderRadius: 50,
-  },
+ 
   saveText: { color: COLORS.white, fontSize: SIZES.h3, fontWeight: 'bold' }
 
 })

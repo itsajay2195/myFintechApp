@@ -2,7 +2,6 @@ import { StyleSheet, Text, View, SafeAreaView, Animated, TouchableOpacity, Image
 import { COLORS, PLATFORM, icons, SIZES } from '../constants'
 import React, { useState } from 'react'
 import SlidingUpPanel from 'rn-sliding-up-panel';
-import BottomTabs from '../components/common/BottomTab'
 import Header from '../components/common/Header'
 import Card from '../components/debitScreen/Card';
 import SlidingPaneListItem from '../components/debitScreen/SlidingPaneList';
@@ -10,10 +9,7 @@ import CurrencyCard from '../components/common/CurrencyCard';
 import { useSelector } from 'react-redux';
 import { selectLoading, selectSpendingLimit } from '../slices/userSlice'
 import Bar from '../components/debitScreen/Bar';
-import Svg, { 
-  Circle, Ellipse, G, TSpan, TextPath, Path, Polygon, Polyline, Line, Rect, Use,  Symbol, Defs, LinearGradient, RadialGradient, Stop, ClipPath, Pattern, Mask 
-} from 'react-native-svg'
-
+import {SvgShow,SvgRemove} from '../assets/svgs'
 
 const Home = () => {
   const [showcard, setShowCard] = useState(true)
@@ -23,7 +19,7 @@ const Home = () => {
 
 
   const draggableRange = {
-    top: PLATFORM === 'ios' ? SIZES.height - 30 : SIZES.height - 30,
+    top: PLATFORM === 'ios' ? SIZES.height - 30 : SIZES.height - 50,
     bottom: SIZES.height / 1.5
   };
 
@@ -67,7 +63,7 @@ const Home = () => {
           <View style={styles.showCardButtonWrapper}>
 
             <TouchableOpacity style={styles.showCardButton} onPress={() => setShowCard(!showcard)}>
-              <Image source={showcard ? icons.show : icons.remove} style={{ height: 15, width: 12 }} />
+              {showcard ? <SvgShow/> : <SvgRemove/>}
               <Text style={styles.showCardNumberText}>{showcard ? 'Hide Card Number' : 'Show Card Number'}</Text>
             </TouchableOpacity>
 

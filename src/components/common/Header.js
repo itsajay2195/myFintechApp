@@ -3,6 +3,7 @@ import { icons, COLORS,SIZES } from '../../constants'
 import React from 'react'
 import { useNavigation } from '@react-navigation/native'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
+import { SvgLogo } from '../../assets/svgs'
 
 const Header = ({ showBack }) => {
     const navigation = useNavigation()
@@ -14,7 +15,7 @@ const Header = ({ showBack }) => {
             </View>
 
             <View style={styles.iconWrapper}>
-                <Image source={icons.logo} style={styles.iconStyle} />
+                <SvgLogo color={COLORS.primaryGreen} />
             </View>
 
         </View>

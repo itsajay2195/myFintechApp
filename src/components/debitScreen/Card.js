@@ -3,6 +3,7 @@ import React, { useEffect } from 'react'
 import { icons, COLORS, SIZES } from '../../constants'
 import { useDispatch, useSelector } from 'react-redux';
 import { setUserInfo, setLoading, selectUserInfo, selectLoading } from '../../slices/userSlice'
+import {SvgVisaLogo,SvgAspireLogo} from '../../assets/svgs'
 
 const Card = ({ showCard }) => {
     const dispatch = useDispatch();
@@ -40,7 +41,7 @@ const Card = ({ showCard }) => {
                     :
                     <>
                         <View style={styles.topLogo}>
-                            <Image source={icons.aspireLogo} style={{ tintColor: 'white', height: 20, width: 70 }} />
+                            <SvgAspireLogo color={COLORS.white}/>
                         </View>
 
                         <View>
@@ -53,7 +54,7 @@ const Card = ({ showCard }) => {
                         </View>
 
                         <View style={styles.topLogo}>
-                            <Image source={icons.visaLogo} style={{ tintColor: 'white', height: 20, width: 60 }} />
+                            <SvgVisaLogo color={COLORS.white}/>
                         </View>
                     </>
 
