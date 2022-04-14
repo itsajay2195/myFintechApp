@@ -9,18 +9,17 @@ const BarChart = () => {
     const dispatch = useDispatch();
     const expenseInfo = useSelector(selectExpenseInfo)
     const loading = useSelector(selectLoading)
-    const data = [{ "month": "Dec", "expense": 6000 }, { "month": "Jan", "expense": 8000 }, { "month": "Feb", "expense": 12000 }, { "month": "Mar", "expense": 4000 }]
-
+    
     useEffect(() => {
         dispatch(setLoading(true))
         const getUserInfo = async () => {
-            const url = 'https://run.mocky.io/v3/532f01a2-7a70-4c3e-9551-ebc9096653fe'
+            const url = '/api/user/1/monthly-expense'
             fetch(
                 url
             ).then((res) => res.json())
-                .then((data) => {
+                .then((json) => {
                     dispatch(setLoading(false))
-                    dispatch(setExpenseInfo(data))
+                    dispatch(setExpenseInfo(json.data))
                 })
 
         }

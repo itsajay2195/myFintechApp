@@ -6,21 +6,20 @@ import Header from '../components/common/Header'
 import Card from '../components/debitScreen/Card';
 import SlidingPaneListItem from '../components/debitScreen/SlidingPaneList';
 import CurrencyCard from '../components/common/CurrencyCard';
-import { useDispatch, useSelector } from 'react-redux';
-import { selectLoading, selectSpendingLimit, selectUserInfo,setUserInfo, setLoading } from '../redux/userSlice'
+import {  useSelector } from 'react-redux';
+import { selectLoading, selectSpendingLimit, selectUserInfo,selectAmountSpent } from '../redux/userSlice'
 import Bar from '../components/debitScreen/Bar';
 import {SvgShow,SvgRemove} from '../assets/svgs'
+import WeeklyLimit from './WeeklyLimitScreen';
 
 
 const Home = () => {
-  const dispatch = useDispatch()
   const [showcard, setShowCard] = useState(true)
   const loading = useSelector(selectLoading)
   const spendingLimit = useSelector(selectSpendingLimit) 
   const userInfo = useSelector(selectUserInfo);
+  const amountSpent = useSelector(selectAmountSpent)
 
-
-  
 
   const draggableRange = {
     top: PLATFORM === 'ios' ? SIZES.height - 30 : SIZES.height - 50,
@@ -53,7 +52,8 @@ const Home = () => {
           <CurrencyCard />
 
           <View>
-            <Text style={styles.currencyTotalText}>{loading ?'' : ` ${ !userInfo ? '- - - -' :  userInfo?.card_info?.available_balance}`}</Text>
+            <Text style={styles.currencyTotalText}>{loading ?'' : ` ${ !userInfo ? '- - - -' :  userInfo?.card_info?.available_balance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`}</Text>
+            
           </View>
 
         </View>
@@ -85,17 +85,17 @@ const Home = () => {
               <>
                 <View style={styles.spendingLimitWrapper}>
                   <Text style={{ fontSize: 12 }}>Debit card spending limit</Text>
-                  <Text style={{ color: COLORS.gray, fontSize: 12 }}><Text style={{ color: COLORS.primaryGreen, fontWeight: 'bold' }}>$345 </Text>| ${spendingLimit}</Text>
+                  <Text style={{ color: COLORS.gray, fontSize: 12 }}><Text style={{ color: COLORS.primaryGreen, fontWeight: 'bold' }}>${amountSpent?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} </Text>| ${spendingLimit?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</Text>
                 </View>
 
                 <View style={{ padding: 5 }}>
-                  <Bar></Bar>
+                  <Bar amountSpent={amountSpent} weeklyLimit={spendingLimit}></Bar>
                 </View>
               </>
 
             }
 
-            <SlidingPaneListItem spendingLimit={spendingLimit}></SlidingPaneListItem>
+            <SlidingPaneListItem spendingLimit={spendingLimit} ></SlidingPaneListItem>
           </View>
 
         </View>

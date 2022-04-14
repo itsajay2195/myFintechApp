@@ -1,8 +1,8 @@
-import { StyleSheet, Text, View, Image, ActivityIndicator,Alert } from 'react-native'
+import { StyleSheet, Text, View,  ActivityIndicator,Alert } from 'react-native'
 import React, { useEffect } from 'react'
-import { icons, COLORS, SIZES } from '../../constants'
+import {  COLORS, SIZES } from '../../constants'
 import { useDispatch, useSelector } from 'react-redux';
-import { setUserInfo, setLoading, selectUserInfo, selectLoading } from '../../redux/userSlice'
+import { setUserInfo, setLoading,selectWeeklyLimitToggled ,selectUserInfo, selectLoading,setSpendingLimit,setAmountSpent,setWeeklyLimitToggled } from '../../redux/userSlice'
 import {SvgVisaLogo,SvgAspireLogo} from '../../assets/svgs'
 
 
@@ -22,7 +22,10 @@ const Card = ({ showCard }) => {
     const userInfo = useSelector(selectUserInfo) || STATIC_CARD_INFO
     const {card_holder,card_number,cvv,thru} = userInfo.card_info
     const loading = useSelector(selectLoading)
+    const toggleInfo = useSelector(selectWeeklyLimitToggled)
+
     
+
     useEffect(() => {
         
           
@@ -35,11 +38,17 @@ const Card = ({ showCard }) => {
                 .then((json) => {
                     dispatch(setLoading(false))
                     dispatch(setUserInfo(json.data))
+                    dispatch(setSpendingLimit(json.data.weekly_limit))
+                    dispatch(setAmountSpent(json.data.amount_spent))
+                    dispatch(setWeeklyLimitToggled(json.data.weeklyLimitEnabled))
                 }).catch(e=>{ 
                     Alert.alert("Something went wrong")
                     dispatch(setLoading(false))
                     dispatch(setError(null)) 
                     dispatch(setUserInfo(null))
+                    dispatch(setSpendingLimit(null))
+                    dispatch(setAmountSpent(null))
+                    dispatch(setWeeklyLimitToggled(null))
                 })
 
         }
@@ -87,7 +96,7 @@ const Card = ({ showCard }) => {
 
     )
 }
-//{!showCard ? userInfo.card_no : userInfo.card_no.replace(/\d{4}(?= \d{4})/g, "****")}
+
 
 export default Card
 

@@ -15,7 +15,7 @@ const PasswordPane = ({ modalVisible, setModalVisible, saveSpendingLimit, id, va
   const submit = (id, value) => {
 
     setModalVisible(!modalVisible)
-    saveSpendingLimit(value, id)
+    saveSpendingLimit(value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","), id)
   }
 
 
@@ -26,7 +26,7 @@ const PasswordPane = ({ modalVisible, setModalVisible, saveSpendingLimit, id, va
       transparent={true}
       visible={modalVisible}
       onRequestClose={() => {
-        // Alert.alert("Modal has been closed.");
+        
         setModalVisible(!modalVisible);
       }}
     >
@@ -40,7 +40,7 @@ const PasswordPane = ({ modalVisible, setModalVisible, saveSpendingLimit, id, va
             <Pressable
               disabled={!pin}
               style={[styles.button, {backgroundColor: pin === '' ? COLORS.lightGray : COLORS.primaryGreen}]}
-              onPress={() => userInfo.pin === pin ? submit(id, value) : setInvalidPin(!invalidPin)}
+              onPress={() => userInfo.card_info.pin === pin ? submit(id, value) : setInvalidPin(!invalidPin)}
             >
               <Text style={[styles.textStyle, { color: COLORS.primaryBlue }]}>submit</Text>
             </Pressable>

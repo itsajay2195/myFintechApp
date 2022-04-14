@@ -4,7 +4,7 @@ import Header from '../components/common/Header'
 import { COLORS, PLATFORM, icons, SIZES } from '../constants'
 import CurrencyCard from '../components/common/CurrencyCard'
 import Tags from '../components/weeklyLimitScreen/Tags'
-import { setSpendingLimit, setMenuInfo, selectMenuInfo } from '../redux/userSlice'
+import { setSpendingLimit, selectUserInfo, selectSpendingLimit, setWeeklyLimitToggled } from '../redux/userSlice'
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigation } from '@react-navigation/native'
 import PasswordPane from '../components/weeklyLimitScreen/PasswordPane'
@@ -14,25 +14,38 @@ import PrimaryButton from '../components/common/PrimaryButton'
 const WeeklyLimit = (props) => {
   const { id, toggledValue } = props.route.params;
   const [modalVisible, setModalVisible] = useState(false);
-  const menuInfo = useSelector(selectMenuInfo)
-  const [limitFieldValue, onLimitFieldValueChange] = useState('')
+  const [limitFieldValue, onLimitFieldValueChange] = useState(useSelector(selectSpendingLimit)?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","))
+  const userInfo = useSelector(selectUserInfo);
   const dispatch = useDispatch();
   const navigation = useNavigation()
 
 
-  const menuInfoModifierPayload = (id) => {
-    let objIndex = menuInfo.findIndex((obj => obj.id == id));
-    return { index: objIndex, value: !toggledValue }
-  }
-  const saveSpendingLimit = (val, id) => {
+ 
+  
+  const saveSpendingLimit = (val, id,isToggled) => {
+    
     let num = parseFloat(val.replace(',', ''))//  this is basically done to check if the user inputted number is less than 0 or not
     if (num < 0) {
       Alert.alert('Amount cannot be less than Zero')
+      return
     }
-    let decimalStrippedValue = val.includes(".") ? val.split(".")[0] : val // this will strip the contents after the decimal point
-    dispatch(setSpendingLimit(decimalStrippedValue))
-    menuInfoModifierPayload(id)
-    dispatch(setMenuInfo(menuInfoModifierPayload(id)))
+
+    if(typeof(num) !== 'number' || null) {
+      Alert.alert('Invalid input')
+      return
+    }
+    
+
+    let decimalStrippedValue = val.includes(".") ? parseFloat(val.split(".")[0].replace(',','')) : num // this will strip the contents after the decimal point
+    
+    if(userInfo?.card_info?.available_balance< decimalStrippedValue ){
+      Alert.alert('Insufficeint balance')
+      return
+    }
+  
+    dispatch(setSpendingLimit( decimalStrippedValue))
+    dispatch(setWeeklyLimitToggled(!isToggled))
+    
     navigation.navigate('Debit Card')
   }
 

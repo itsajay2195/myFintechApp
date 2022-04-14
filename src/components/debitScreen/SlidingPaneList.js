@@ -1,13 +1,19 @@
 import { StyleSheet, Text, View, Image, Switch, Alert } from 'react-native'
 import React from 'react'
-import { COLORS,SIZES } from '../../constants'
+import { icons, COLORS, SIZES } from '../../constants'
 import { useNavigation } from '@react-navigation/native'
 import { useDispatch, useSelector } from 'react-redux';
-import { selectMenuInfo, setMenuInfo, setSpendingLimit } from '../../redux/userSlice'
+import { setAmountSpent,  setSpendingLimit, selectWeeklyLimitToggled, setWeeklyLimitToggled } from '../../redux/userSlice'
 
 
 const SlidingPaneList = ({ spendingLimit }) => {
-  const panelMenu = useSelector(selectMenuInfo)
+  const panelMenu = [
+    { id: 1, image: icons.insight, title: 'Top-up-account', meta: 'Deposit money to your account to use with card', toggle: false },
+    { id: 2, image: icons.transfer, title: 'Weekly spending limit', meta: "you haven't set any spending limit on card", toggle: true, isToggled: useSelector(selectWeeklyLimitToggled) },
+    { id: 3, image: icons.freeze, title: 'Freeze card', meta: 'Your Debit card is currently active', toggle: null },
+    { id: 4, image: icons.newCard, title: 'Get a new card ', meta: 'This activates your current debit card', toggle: false },
+    { id: 5, image: icons.deactivate, title: 'Deactivated cards', meta: 'This deactivates your current debit card', toggle: false },
+  ]
   return (
     <>
       {panelMenu.map(item => <ListItem item={item} spendingLimit={spendingLimit} />)}
@@ -19,15 +25,36 @@ const SlidingPaneList = ({ spendingLimit }) => {
 
 export default SlidingPaneList
 
+
 const ListItem = ({ item, spendingLimit }) => {
   const dispatch = useDispatch();
   const navigation = useNavigation()
-  const menuInfo = useSelector(selectMenuInfo)
+  const isToggled = useSelector(selectWeeklyLimitToggled)
 
-  const menuInfoModifierPayload = (id) => {
-    let objIndex = menuInfo.findIndex((obj => obj.id == id));
-    return { index: objIndex, value: false }
+  const updateToggleInfo = () => {
+    const url = '/api/user/1/weklylimittoggle'
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ weeklyLimitEnabled: true })
+    }).then(res => {
+      try {
+        if (res.status !== 200) throw new Error(res.status)
+        dispatch(setSpendingLimit(null))
+        dispatch(setAmountSpent(0))
+        dispatch(setWeeklyLimitToggled(!isToggled))
+        
+      } catch (error) {
+
+        Alert.alert(String(error + " Something went wrong"))
+      }
+    })
+
+
   }
+
 
   return (
     <View style={styles.container}>
@@ -57,16 +84,16 @@ const ListItem = ({ item, spendingLimit }) => {
                   [
                     {
                       text: 'Proceed', onPress: () => {
-                        dispatch(setMenuInfo(menuInfoModifierPayload(item.id)))
-                        dispatch(setSpendingLimit(null))
+                        updateToggleInfo()
+                        
                       }
                     },
                     { text: 'Cancel' },
                   ],
                   { cancelable: false }
                 )
-                dispatch(setMenuInfo(menuInfoModifierPayload(item.id)))
-                dispatch(setSpendingLimit(null))
+                //dispatch(setSpendingLimit(null))dispatch(setMenuInfo(menuInfoModifierPayload(item.id)))
+
                 return;
               }
               navigation.navigate('Limit', { id: item.id, toggledValue: item?.isToggled })
@@ -90,7 +117,7 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    padding: SIZES.padding/2
+    padding: SIZES.padding / 2
   },
   menuInfoWrapper: {
     width: '80%'

@@ -1,13 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { COLORS } from '../../constants'
+import { useSelector } from 'react-redux';
+import { selectAmountSpent,selectSpendingLimit } from '../../redux/userSlice'
 
 const Bar = () => {
+  
+  const amountSpent = useSelector(selectAmountSpent)
+  const weeklyLimit = useSelector(selectSpendingLimit)
+  const percentage = Math.floor(amountSpent * 100 / weeklyLimit)
+  {console.warn(amountSpent,weeklyLimit)}
 
   return (
     <View >
       <View style={styles.triangleCornerLayer}></View>
-      <View style={styles.triangleCorner1}></View>
+      <View style={[styles.triangleCorner1,{width: `${percentage}%`,}]}></View>
 
     </View>
   );
@@ -21,7 +28,6 @@ const styles = StyleSheet.create({
 
 
     left: 0,
-    width: `${Math.floor(354 * 100 / 5000)}%`,
     backgroundColor: 'transparent',
     borderStyle: 'solid',
     borderRightWidth: 10,
