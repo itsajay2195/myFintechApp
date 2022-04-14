@@ -111,8 +111,11 @@
         - The also allows the user to control his/her cash flows.
 
 
+![ezgif com-gif-maker](https://user-images.githubusercontent.com/47854133/163332230-80c29e4f-a3cc-4698-83b8-806226a1c555.gif)
 
-![ezgif com-gif-maker (1)](https://user-images.githubusercontent.com/47854133/162360147-f4f6c83f-fc41-4211-8fb3-48d7bcb95c37.gif)
+
+
+
 
 
 
