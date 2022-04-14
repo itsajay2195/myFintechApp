@@ -1,10 +1,10 @@
-import { StyleSheet, Text, View , TouchableOpacity} from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import React from 'react'
-import {COLORS,SIZES} from '../../constants/index'
+import { COLORS, SIZES } from '../../constants/index'
 
-const PrimaryButton = ({isDisabled,btnText,onPress,...props}) => {
+const PrimaryButton = ({ isDisabled, btnText, onPress, ...props }) => {
     return (
-        <TouchableOpacity disabled={isDisabled} style={[styles.saveButton, { backgroundColor: isDisabled ? COLORS.lightGray : COLORS.primaryGreen,width:props.width? props.width:'80%',height:props.height?props.height:60  }]} onPress={() => onPress()}>
+        <TouchableOpacity disabled={isDisabled} style={[styles.saveButton, { backgroundColor: isDisabled ? COLORS.lightGray : COLORS.primaryGreen, width: props.width ? props.width : '80%', height: props.height ? props.height : 60 }]} onPress={() => onPress()}>
             <Text style={styles.saveText}>{btnText}</Text>
         </TouchableOpacity>
 
@@ -22,6 +22,6 @@ const styles = StyleSheet.create({
         height: 30,
         width: '30%',
         borderRadius: 50,
-      },
-      saveText: { color: COLORS.white, fontSize: SIZES.h3, fontWeight: 'bold' }
+    },
+    saveText: { color: COLORS.white, fontSize: SIZES.h3, fontWeight: 'bold' }
 })

@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, SafeAreaView, StatusBar, Image, TextInput, TouchableOpacity, Alert, ScrollView } from 'react-native'
+import { StyleSheet, Text, View, SafeAreaView, StatusBar, Image, TextInput, Alert, ScrollView } from 'react-native'
 import React, { useState } from 'react'
 import Header from '../components/common/Header'
 import { COLORS, PLATFORM, icons, SIZES } from '../constants'
@@ -20,36 +20,36 @@ const WeeklyLimit = (props) => {
   const navigation = useNavigation()
 
 
- 
-  
-  const saveSpendingLimit = (val, id,isToggled) => {
-    
+
+
+  const saveSpendingLimit = (val, id, isToggled) => {
+
     let num = parseFloat(val.replace(',', ''))//  this is basically done to check if the user inputted number is less than 0 or not
     if (num < 0) {
       Alert.alert('Amount cannot be less than Zero')
       return
     }
 
-    if(typeof(num) !== 'number' || null) {
+    if (typeof (num) !== 'number' || null) {
       Alert.alert('Invalid input')
       return
     }
-    
 
-    let decimalStrippedValue = val.includes(".") ? parseFloat(val.split(".")[0].replace(',','')) : num // this will strip the contents after the decimal point
-    
-    if(userInfo?.card_info?.available_balance< decimalStrippedValue ){
+
+    let decimalStrippedValue = val.includes(".") ? parseFloat(val.split(".")[0].replace(',', '')) : num // this will strip the contents after the decimal point
+
+    if (userInfo?.card_info?.available_balance < decimalStrippedValue) {
       Alert.alert('Insufficeint balance')
       return
     }
-  
-    dispatch(setSpendingLimit( decimalStrippedValue))
+
+    dispatch(setSpendingLimit(decimalStrippedValue))
     dispatch(setWeeklyLimitToggled(!isToggled))
-    
+
     navigation.navigate('Debit Card')
   }
 
-  const onSaveClick =()=>{
+  const onSaveClick = () => {
     setModalVisible(!modalVisible)
   }
   return (
@@ -99,7 +99,7 @@ const WeeklyLimit = (props) => {
       {modalVisible && <PasswordPane modalVisible={modalVisible} setModalVisible={setModalVisible} saveSpendingLimit={saveSpendingLimit} id={id} value={limitFieldValue} />}
       <SafeAreaView style={styles.saveButtonContainer}>
 
-        <PrimaryButton isDisabled={!limitFieldValue} height={60} width="80%" onPress={onSaveClick} btnText={"Save"}/>
+        <PrimaryButton isDisabled={!limitFieldValue} height={60} width="80%" onPress={onSaveClick} btnText={"Save"} />
 
       </SafeAreaView>
     </View>
@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     paddingBottom: PLATFORM === "android" ? StatusBar.currentHeight : 0
   },
- 
+
   saveText: { color: COLORS.white, fontSize: SIZES.h3, fontWeight: 'bold' }
 
 })

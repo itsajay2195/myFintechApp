@@ -26,7 +26,7 @@ const PasswordPane = ({ modalVisible, setModalVisible, saveSpendingLimit, id, va
       transparent={true}
       visible={modalVisible}
       onRequestClose={() => {
-        
+
         setModalVisible(!modalVisible);
       }}
     >
@@ -39,7 +39,7 @@ const PasswordPane = ({ modalVisible, setModalVisible, saveSpendingLimit, id, va
           <View style={styles.buttonsContainer}>
             <Pressable
               disabled={!pin}
-              style={[styles.button, {backgroundColor: pin === '' ? COLORS.lightGray : COLORS.primaryGreen}]}
+              style={[styles.button, { backgroundColor: pin === '' ? COLORS.lightGray : COLORS.primaryGreen }]}
               onPress={() => userInfo.card_info.pin === pin ? submit(id, value) : setInvalidPin(!invalidPin)}
             >
               <Text style={[styles.textStyle, { color: COLORS.primaryBlue }]}>submit</Text>
@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
   buttonClose: {
     backgroundColor: COLORS.white,
   },
- 
+
   textStyle: {
     fontWeight: "bold",
     textAlign: "center"

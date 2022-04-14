@@ -9,7 +9,7 @@ const Bar = () => {
   const amountSpent = useSelector(selectAmountSpent)
   const weeklyLimit = useSelector(selectSpendingLimit)
   const percentage = Math.floor(amountSpent * 100 / weeklyLimit)
-  {console.warn(amountSpent,weeklyLimit)}
+
 
   return (
     <View >

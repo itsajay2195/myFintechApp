@@ -3,7 +3,7 @@ import React from 'react'
 import { icons, COLORS, SIZES } from '../../constants'
 import { useNavigation } from '@react-navigation/native'
 import { useDispatch, useSelector } from 'react-redux';
-import { setAmountSpent,  setSpendingLimit, selectWeeklyLimitToggled, setWeeklyLimitToggled } from '../../redux/userSlice'
+import { setAmountSpent, setSpendingLimit, selectWeeklyLimitToggled, setWeeklyLimitToggled } from '../../redux/userSlice'
 
 
 const SlidingPaneList = ({ spendingLimit }) => {
@@ -45,7 +45,7 @@ const ListItem = ({ item, spendingLimit }) => {
         dispatch(setSpendingLimit(null))
         dispatch(setAmountSpent(0))
         dispatch(setWeeklyLimitToggled(!isToggled))
-        
+
       } catch (error) {
 
         Alert.alert(String(error + " Something went wrong"))
@@ -85,14 +85,13 @@ const ListItem = ({ item, spendingLimit }) => {
                     {
                       text: 'Proceed', onPress: () => {
                         updateToggleInfo()
-                        
+
                       }
                     },
                     { text: 'Cancel' },
                   ],
                   { cancelable: false }
                 )
-                //dispatch(setSpendingLimit(null))dispatch(setMenuInfo(menuInfoModifierPayload(item.id)))
 
                 return;
               }

@@ -1,22 +1,22 @@
-import { StyleSheet, Text, View, SafeAreaView, Animated, TouchableOpacity, Image, StatusBar } from 'react-native'
+import { StyleSheet, Text, View, SafeAreaView, Animated, TouchableOpacity, StatusBar } from 'react-native'
 import { COLORS, PLATFORM, icons, SIZES } from '../constants'
-import React, { useState,useEffect } from 'react'
+import React, { useState } from 'react'
 import SlidingUpPanel from 'rn-sliding-up-panel';
 import Header from '../components/common/Header'
 import Card from '../components/debitScreen/Card';
 import SlidingPaneListItem from '../components/debitScreen/SlidingPaneList';
 import CurrencyCard from '../components/common/CurrencyCard';
-import {  useSelector } from 'react-redux';
-import { selectLoading, selectSpendingLimit, selectUserInfo,selectAmountSpent } from '../redux/userSlice'
+import { useSelector } from 'react-redux';
+import { selectLoading, selectSpendingLimit, selectUserInfo, selectAmountSpent } from '../redux/userSlice'
 import Bar from '../components/debitScreen/Bar';
-import {SvgShow,SvgRemove} from '../assets/svgs'
-import WeeklyLimit from './WeeklyLimitScreen';
+import { SvgShow, SvgRemove } from '../assets/svgs'
+
 
 
 const Home = () => {
   const [showcard, setShowCard] = useState(true)
   const loading = useSelector(selectLoading)
-  const spendingLimit = useSelector(selectSpendingLimit) 
+  const spendingLimit = useSelector(selectSpendingLimit)
   const userInfo = useSelector(selectUserInfo);
   const amountSpent = useSelector(selectAmountSpent)
 
@@ -25,7 +25,7 @@ const Home = () => {
     top: PLATFORM === 'ios' ? SIZES.height - 30 : SIZES.height - 50,
     bottom: SIZES.height / 1.5
   };
- 
+
 
 
 
@@ -52,8 +52,8 @@ const Home = () => {
           <CurrencyCard />
 
           <View>
-            <Text style={styles.currencyTotalText}>{loading ?'' : ` ${ !userInfo ? '- - - -' :  userInfo?.card_info?.available_balance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`}</Text>
-            
+            <Text style={styles.currencyTotalText}>{loading ? '' : ` ${!userInfo ? '- - - -' : userInfo?.card_info?.available_balance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`}</Text>
+
           </View>
 
         </View>
@@ -68,7 +68,7 @@ const Home = () => {
           <View style={styles.showCardButtonWrapper}>
 
             <TouchableOpacity style={styles.showCardButton} onPress={() => setShowCard(!showcard)}>
-              {showcard ? <SvgShow/> : <SvgRemove/>}
+              {showcard ? <SvgShow /> : <SvgRemove />}
               <Text style={styles.showCardNumberText}>{showcard ? 'Hide Card Number' : 'Show Card Number'}</Text>
             </TouchableOpacity>
 

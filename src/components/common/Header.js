@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, Image } from 'react-native'
-import { icons, COLORS,SIZES } from '../../constants'
+import { icons, COLORS, SIZES } from '../../constants'
 import React from 'react'
 import { useNavigation } from '@react-navigation/native'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
@@ -26,7 +26,7 @@ export default Header
 
 const styles = StyleSheet.create({
     container: {
-        paddingHorizontal: SIZES.padding/2,
+        paddingHorizontal: SIZES.padding / 2,
         flexDirection: 'row',
         justifyContent: 'space-between',
         height: 40,

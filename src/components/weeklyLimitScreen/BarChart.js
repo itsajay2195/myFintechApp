@@ -9,7 +9,7 @@ const BarChart = () => {
     const dispatch = useDispatch();
     const expenseInfo = useSelector(selectExpenseInfo)
     const loading = useSelector(selectLoading)
-    
+
     useEffect(() => {
         dispatch(setLoading(true))
         const getUserInfo = async () => {

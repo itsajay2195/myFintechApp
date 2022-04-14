@@ -63,6 +63,8 @@
 - React-redux has been usedfor state management. 
 - The mock api's are implemented using https://designer.mocky.io/.
 - The library :react-native victory pie, has been used to display the pictoral representation of data.
+- ## Mirage
+    Mirage is used for mocking the API.
 
 ## In app details
 - The app basically has 2 screens.
