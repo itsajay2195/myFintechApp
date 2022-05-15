@@ -10,7 +10,7 @@ import { Provider } from 'react-redux'
 import { store } from './store'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import {SvgLogo,SvgCard,SvgPayment,SvgCredit,SvgAccount} from './src/assets/svgs'
-
+import Dummy from './src/screens/Dummy'
 
 
 export default function RootNavigation() {
@@ -33,7 +33,7 @@ export default function RootNavigation() {
                     <Tab.Screen name='Debit Card' component={DebitScreenNavigator}  options={{tabBarIcon:({color})=><SvgCard color={color}/>}} />  
                     <Tab.Screen name='Payments' component={ComingSoon}  options={{tabBarIcon:({color})=><SvgPayment color={color}/>}} />  
                     <Tab.Screen name='Credit' component={ComingSoon}  options={{tabBarIcon:({color})=><SvgCredit color={color}/>}} />  
-                    <Tab.Screen name='Profile' component={ComingSoon}  options={{tabBarIcon:({color})=><SvgAccount color={color}/>}} />  
+                    <Tab.Screen name='Profile' component={Dummy}  options={{tabBarIcon:({color})=><SvgAccount color={color}/>}} />  
                 </Tab.Navigator>
             </NavigationContainer>
         </Provider>
