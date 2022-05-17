@@ -6,11 +6,12 @@ import Animated, { useAnimatedGestureHandler, useSharedValue, useAnimatedStyle, 
 const Dummy = () => {
   const dimensions = useWindowDimensions()
   const top = useSharedValue(
-    dimensions.height
+    dimensions.height 
   )
   const style = useAnimatedStyle(() => {
+    
     return {
-      top: top.value
+      top: top.value / 8
     }
   })
   const gestureHandler = useAnimatedGestureHandler({
@@ -19,8 +20,9 @@ const Dummy = () => {
     }
   })
   return (
-    <>
-      <View style={{ flex: 1, backgroundColor: 'white', justifyContent: 'center', alignItems: 'center' }}>
+
+    <View style={{ flex: 1, backgroundColor: 'white', justifyContent: 'center', alignItems: 'center' }}>
+      <View style={{flex:1,top:50}}>
         <Button title="click" onPress={() => top.value = withSpring(
           dimensions.height / 2,//half of the screen 
           {
@@ -31,7 +33,10 @@ const Dummy = () => {
             stiffness: 500
           }
         )} />
-        <GestureHandlerRootView style={{ width: '100%', height: '70%' }}>
+      </View>
+
+      <View style={{ flex: 1, justifyContent:'flex-end',flexDirection: 'row' }}>
+        <GestureHandlerRootView style={{ width: '100%', height: '100%' }}>
           <PanGestureHandler onGestureEvent={gestureHandler}>
             <Animated.View style={[{
               position: 'absolute',
@@ -60,7 +65,9 @@ const Dummy = () => {
         </GestureHandlerRootView>
 
       </View>
-    </>
+
+    </View>
+
 
   )
 }
