@@ -1,74 +1,45 @@
-import { StyleSheet, Text, View, SafeAreaView, StatusBar, Button, useWindowDimensions } from 'react-native'
-import React from 'react'
-import { GestureHandlerRootView, PanGestureHandler } from 'react-native-gesture-handler'
-import Animated, { useAnimatedGestureHandler, useSharedValue, useAnimatedStyle, withSpring } from 'react-native-reanimated'
+import { StyleSheet, Text, View, Animated,SafeAreaView, StatusBar,Dimensions, Button, useWindowDimensions } from 'react-native'
+import React,{useState} from 'react'
 
+
+const { height,width } = Dimensions.get('window');
 const Dummy = () => {
-  const dimensions = useWindowDimensions()
-  const top = useSharedValue(
-    dimensions.height 
-  )
-  const style = useAnimatedStyle(() => {
-    
-    return {
-      top: top.value / 8
-    }
-  })
-  const gestureHandler = useAnimatedGestureHandler({
-    onActive(e) {
-      top.value = e.translationY;
-    }
-  })
+ 
+
   return (
 
     <View style={{ flex: 1, backgroundColor: 'white', justifyContent: 'center', alignItems: 'center' }}>
-      <View style={{flex:1,top:50}}>
-        <Button title="click" onPress={() => top.value = withSpring(
-          dimensions.height / 2,//half of the screen 
-          {
-            damping: 80,
-            overshootClamping: true,
-            restDisplacementThreshold: 0.1,
-            restSpeedThreshold: 0.1,
-            stiffness: 500
-          }
-        )} />
-      </View>
-
-      <View style={{ flex: 1, justifyContent:'flex-end',flexDirection: 'row' }}>
-        <GestureHandlerRootView style={{ width: '100%', height: '100%' }}>
-          <PanGestureHandler onGestureEvent={gestureHandler}>
-            <Animated.View style={[{
-              position: 'absolute',
-              left: 0,
-              right: 0,
-              bottom: 0,
-              backgroundColor: 'red',
-              borderTopLeftRadius: 20,
-              borderTopRightRadius: 20,
-              shadowColor: 'black',
-              shadowOffset: {
-                width: 0,
-                height: 2
-              },
-              shadowOpacity: 0.25,
-              shadowRadius: 3.84,
-              elevation: 5,
-              padding: 20,
-              justifyContent: 'center',
-              alignItems: 'center'
-            }, style]}>
-              <Text>Sheet </Text>
-            </Animated.View>
-          </PanGestureHandler>
-
-        </GestureHandlerRootView>
-
-      </View>
+      <Text>Hi</Text>
+      <BottomSheer/>
 
     </View>
 
 
+  )
+}
+
+const BottomSheer =()=>{
+  const [alignment] = useState(new Animated.Value(0))
+  const actionSheetInterpolate = alignment.interpolate({
+    inputRange:[0,1],
+    outputRange:[-height /2.4 ,0]
+  })
+  return(
+    <View style={
+        {
+          position:'absolute',
+          backgroundColor:'red',
+          height: height/2.4,
+          left:0,
+          right:0,
+          bottom:0,
+          width:width/1.05,
+          borderTopRightRadius:40,
+          marginHorizontal:10
+        }
+    }>
+
+    </View>
   )
 }
 
