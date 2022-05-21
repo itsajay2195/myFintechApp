@@ -24,8 +24,14 @@ const BottomSheer =()=>{
     inputRange:[0,1],
     outputRange:[-height /2.4 ,0]
   })
+
+  const actionSheetstyle = {
+    transform:[{ translateY:actionSheetInterpolate}
+     
+    ]
+  }
   return(
-    <View style={
+    <Animated.View style={[
         {
           position:'absolute',
           backgroundColor:'red',
@@ -36,10 +42,12 @@ const BottomSheer =()=>{
           width:width/1.05,
           borderTopRightRadius:40,
           marginHorizontal:10
-        }
+        },
+        actionSheetstyle
+      ]
     }>
 
-    </View>
+    </Animated.View>
   )
 }
 
